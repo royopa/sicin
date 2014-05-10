@@ -1,0 +1,7 @@
+royopa_sicin:
+    resource: "@RoyopaSicinBundle/Resources/config/routing.yml"
+    prefix:   /
+
+royopa_sicin_annotation:
+    resource: "@RoyopaSicinBundle/Controller"
+    type:     annotation

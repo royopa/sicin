@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Posicao</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Datareferencia</th>
+                <td>{{ entity.dataReferencia|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Quantidade</th>
+                <td>{{ entity.quantidade }}</td>
+            </tr>
+            <tr>
+                <th>Valormercado</th>
+                <td>{{ entity.valorMercado }}</td>
+            </tr>
+            <tr>
+                <th>Valorbrutototal</th>
+                <td>{{ entity.valorBrutoTotal }}</td>
+            </tr>
+            <tr>
+                <th>Valorliquidototal</th>
+                <td>{{ entity.valorLiquidoTotal }}</td>
+            </tr>
+            <tr>
+                <th>Valorrendimentototal</th>
+                <td>{{ entity.valorRendimentoTotal }}</td>
+            </tr>
+            <tr>
+                <th>Percentualrendimentototal</th>
+                <td>{{ entity.percentualRendimentoTotal }}</td>
+            </tr>
+            <tr>
+                <th>Valorprovento</th>
+                <td>{{ entity.valorProvento }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('posicao') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('posicao_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

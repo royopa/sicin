@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Posicao list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datareferencia</th>
+                <th>Quantidade</th>
+                <th>Valormercado</th>
+                <th>Valorbrutototal</th>
+                <th>Valorliquidototal</th>
+                <th>Valorrendimentototal</th>
+                <th>Percentualrendimentototal</th>
+                <th>Valorprovento</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('posicao_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.dataReferencia %}{{ entity.dataReferencia|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.quantidade }}</td>
+                <td>{{ entity.valorMercado }}</td>
+                <td>{{ entity.valorBrutoTotal }}</td>
+                <td>{{ entity.valorLiquidoTotal }}</td>
+                <td>{{ entity.valorRendimentoTotal }}</td>
+                <td>{{ entity.percentualRendimentoTotal }}</td>
+                <td>{{ entity.valorProvento }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('posicao_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('posicao_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('posicao_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

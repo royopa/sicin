@@ -1,0 +1,49 @@
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js') }}"></script>
+<![endif]-->
+{% block title %}
+    {% if title is defined %}
+<title>{{ title }}</title>
+    {% endif %}
+{% endblock %}
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<!-- Favicon caixa -->
+<link rel="icon" href="{{ asset('bundles/royopasicin/img/favicon.ico') }}" type="image/x-icon">
+
+<!-- jQuery UI CSS -->
+<link href="{{ asset('vendor/jquery-ui/themes/redmond/jquery-ui.min.css') }}" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link href="{{ asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+<!-- DataTables CSS -->
+<link href="{{ asset('vendor/datatables/media/css/jquery.dataTables.css') }}" rel="stylesheet">
+
+<!-- DataTables Tabletools -->
+<link href="{{ asset('vendor/datatables-tabletools/css/dataTables.tableTools.css') }}" rel="stylesheet">
+
+<!-- Font Awesome CSS -->
+<link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
+<!-- jQuery  -->
+<script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+
+<!-- select2 -->
+<link href="{{ asset('vendor/select2/select2.css') }}" rel="stylesheet">
+
+<!-- CSS da página -->
+<link href="{{ asset('bundles/royopasicin/css/gerat.css') }}" rel="stylesheet">
+
+<!-- select2 -->
+<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+<script src="{{ asset('vendor/select2/select2_locale_pt-BR.js') }}"></script>
+
+<script>
+$(document).ready(function() {
+    $(".select2").select2({
+        allowClear: true
+    });
+});
+</script>

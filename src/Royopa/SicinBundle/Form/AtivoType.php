@@ -10,17 +10,18 @@ class AtivoType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nome')
-            ->add('dataVencimento')
             ->add('tipo')
+            ->add('nome')
+            ->add('codigo')
+            ->add('dataVencimento')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

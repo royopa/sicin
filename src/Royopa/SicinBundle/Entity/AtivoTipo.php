@@ -39,6 +39,16 @@ class AtivoTipo
     private $categoria;
 
     /**
+     * @var \Royopa\SicinBundle\Entity\TaxaTipo
+     *
+     * @ORM\ManyToOne(targetEntity="TaxaTipo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="taxa_tipo_id", referencedColumnName="id")
+     * })
+     */
+    private $taxa;
+
+    /**
      * Get id
      *
      * @return integer
@@ -102,5 +112,43 @@ class AtivoTipo
     public function __toString()
     {
         return $this->nome;
+    }
+
+    /**
+     * Sets the value of id.
+     *
+     * @param integer $id the id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets the }).
+     *
+     * @return \Royopa\SicinBundle\Entity\TaxaTipo
+     */
+    public function getTaxa()
+    {
+        return $this->taxa;
+    }
+
+    /**
+     * Sets the }).
+     *
+     * @param \Royopa\SicinBundle\Entity\TaxaTipo $taxa the taxa
+     *
+     * @return self
+     */
+    public function setTaxa(\Royopa\SicinBundle\Entity\TaxaTipo $taxa)
+    {
+        $this->taxa = $taxa;
+
+        return $this;
     }
 }

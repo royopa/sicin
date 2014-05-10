@@ -29,6 +29,13 @@ class Ativo
     private $nome;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=255)
+     */
+    private $codigo;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="data_vencimento", type="date", nullable=true)
@@ -122,5 +129,53 @@ class Ativo
     public function getTipo()
     {
         return $this->tipo;
+    }
+
+    /**
+     * Sets the value of id.
+     *
+     * @param integer $id the id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of codigo.
+     *
+     * @return string
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    /**
+     * Sets the value of codigo.
+     *
+     * @param string $codigo the codigo
+     *
+     * @return self
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    /**
+     * __toString()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->codigo . ' - ' . $this->nome;
     }
 }

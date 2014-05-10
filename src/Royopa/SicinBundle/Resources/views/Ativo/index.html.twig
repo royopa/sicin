@@ -1,14 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
 
 {% block body -%}
-    <h1>Ativo list</h1>
+    <h1>Ativos</h1>
 
-    <table class="records_list">
+    <table class="datatable">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Datavencimento</th>
+                <th>Código</th>
+                <th>Dt Vencimento</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,7 +18,8 @@
             <tr>
                 <td><a href="{{ path('ativo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.nome }}</td>
-                <td>{% if entity.dataVencimento %}{{ entity.dataVencimento|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.codigo }}</td>
+                <td>{% if entity.dataVencimento %}{{ entity.dataVencimento|date('d/m/Y') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>

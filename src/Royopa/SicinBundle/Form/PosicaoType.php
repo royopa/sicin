@@ -10,11 +10,13 @@ class PosicaoType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('instituicaoFinanceira')
+            ->add('ativo')
             ->add('dataReferencia')
             ->add('quantidade')
             ->add('valorMercado')
@@ -23,11 +25,9 @@ class PosicaoType extends AbstractType
             ->add('valorRendimentoTotal')
             ->add('percentualRendimentoTotal')
             ->add('valorProvento')
-            ->add('ativo')
-            ->add('instituicaoFinanceira')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

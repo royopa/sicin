@@ -1,0 +1,15 @@
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
+
+{% block body -%}
+    <h1>TaxaTipo creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('taxa_tipo') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

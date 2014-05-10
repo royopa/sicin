@@ -1,20 +1,20 @@
-{% extends '::base.html.twig' %}
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
 
 {% block body -%}
-    <h1>Posicao list</h1>
+    <h1>Posição</h1>
 
-    <table class="records_list">
+    <table class="datatable">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Datareferencia</th>
-                <th>Quantidade</th>
-                <th>Valormercado</th>
-                <th>Valorbrutototal</th>
-                <th>Valorliquidototal</th>
-                <th>Valorrendimentototal</th>
-                <th>Percentualrendimentototal</th>
-                <th>Valorprovento</th>
+                <th>Dt Ref.</th>
+                <th>Qtd</th>
+                <th>Vr Mercado</th>
+                <th>Vr Bruto Total</th>
+                <th>Vr Liq total</th>
+                <th>Vr Rend Total</th>
+                <th>Pc Rend Total</th>
+                <th>Vr provento</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,7 +22,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('posicao_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.dataReferencia %}{{ entity.dataReferencia|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dataReferencia %}{{ entity.dataReferencia|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.quantidade }}</td>
                 <td>{{ entity.valorMercado }}</td>
                 <td>{{ entity.valorBrutoTotal }}</td>

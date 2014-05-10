@@ -1,0 +1,44 @@
+<div class="footer">
+	<p class="text-center">royopa@gmail.com</p>
+</div>
+
+<!-- Códigos JS -->
+<script type="text/javascript" charset="utf-8">
+$( document ).ready(function() {
+  $('.datatable').dataTable( {
+    "sDom": 'T<"clear">lfrtip',
+      "oTableTools": {
+        "sSwfPath": "{{ asset('vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf') }}"
+      },
+      "oLanguage": {
+        "sProcessing": "Aguarde enquanto os dados são carregados ...",
+        "sLengthMenu": "Mostrar _MENU_ registros por pagina",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "sInfoEmtpy": "Exibindo 0 a 0 de 0 registros",
+        "sInfo": "Exibindo de _START_ a _END_ de _TOTAL_ registros",
+        "sInfoFiltered": "",
+        "sSearch": "Procurar",
+        "oPaginate": {
+          "sFirst":    "Primeiro",
+          "sPrevious": "Anterior",
+          "sNext":     "Próximo",
+          "sLast":     "Último",
+        },
+      },
+    "bPaginate": true,
+    "bJQueryUI": false,
+    "sPaginationType": "full_numbers",
+    "iDisplayLength": 50
+  });
+});
+</script>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- jQuery UI -->
+<script src="{{ asset('vendor/jquery-ui/ui/jquery-ui.custom.js') }}"></script>
+<!-- jQuery DataTables -->
+<script src="{{ asset('vendor/datatables/media/js/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('vendor/datatables-tabletools/js/dataTables.tableTools.js') }}"></script>
+<!-- Funções da página -->
+<script src="{{ asset('bundles/royopasicin/js/sicin.js') }}"></script>

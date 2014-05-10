@@ -20,7 +20,7 @@ class DefaultController extends Controller
      *
      * @Route("/", name="home")
      * @Method("GET")
-     * @Template("RoyopaSicinBundle:Default:index.html.twig")
+     * @Template("RoyopaSicinBundle:Default:base.html.twig")
      */
     public function indexAction()
     {

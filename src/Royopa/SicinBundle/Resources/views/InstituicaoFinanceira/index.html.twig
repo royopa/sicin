@@ -1,9 +1,9 @@
-{% extends '::base.html.twig' %}
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
 
 {% block body -%}
-    <h1>InstituicaoFinanceira list</h1>
+    <h1>Instituições Financeiras</h1>
 
-    <table class="records_list">
+    <table class="datatable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -16,7 +16,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('instituicao_financeira_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.cnpj }}</td>
+                <td>{{ entity.cnpjFormatado }}</td>
                 <td>{{ entity.nome }}</td>
                 <td>
                 <ul>

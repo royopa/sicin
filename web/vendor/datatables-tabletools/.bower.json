@@ -1,0 +1,22 @@
+{
+  "name": "datatables-tabletools",
+  "version": "2.2.1",
+  "main": [
+    "js/dataTables.tableTools.js",
+    "css/dataTables.tableTools.css"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "datatables": ">=1.9.0"
+  },
+  "homepage": "https://github.com/DataTables/TableTools",
+  "_release": "2.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.2.1",
+    "commit": "5d2e670c5a8e60b6642600b232d22f01a7cee1f2"
+  },
+  "_source": "git://github.com/DataTables/TableTools.git",
+  "_target": "~2.2.0",
+  "_originalSource": "datatables-tabletools"
+}

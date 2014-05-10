@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
 
 {% block body -%}
     <h1>Ativo</h1>
@@ -12,6 +12,10 @@
             <tr>
                 <th>Nome</th>
                 <td>{{ entity.nome }}</td>
+            </tr>
+            <tr>
+                <th>Código</th>
+                <td>{{ entity.codigo }}</td>
             </tr>
             <tr>
                 <th>Datavencimento</th>

@@ -100,4 +100,36 @@ class InstituicaoFinanceira
     {
         return $this->nome;
     }
+
+    private function mask($val, $mask)
+    {
+        $maskared = '';
+        $k = 0;
+        for ($i = 0; $i <= strlen($mask) - 1; $i++) {
+            if ($mask[$i] == '#') {
+                if (isset ($val[$k]))
+                    $maskared .= $val[$k++];
+            } else {
+                if (isset ($mask[$i]))
+                    $maskared .= $mask[$i];
+            }
+        }
+
+        return $maskared;
+    }
+
+    /**
+     * Get cnpj
+     *
+     * @return integer
+     */
+    public function getCnpjFormatado()
+    {
+        $cnpj = (string) $this->cnpj;
+
+        $cnpj = str_pad($cnpj, 14, '0', STR_PAD_LEFT);
+
+        return $this->mask($cnpj,'##.###.###/####-##');
+    }
+
 }

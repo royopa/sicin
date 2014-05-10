@@ -1,8 +1,56 @@
-<h1>SICIN - Sistema de Cadastro de Investimentos</h1>
-<ul>
-    <li><a href="{{ path('instituicao_financeira') }}">Instituição Financeira</a></li>
-    <li><a href="{{ path('ativo_categoria') }}">Categoria Ativo</a></li>
-    <li><a href="{{ path('ativo_tipo') }}">Tipo Ativo</a></li>
-    <li><a href="{{ path('ativo') }}">Ativo</a></li>
-    <li><a href="{{ path('posicao') }}">Posição</a></li>
-</ul>
+<h1 class="page-header center">SICIN - Sistema de Cadastro de Investimentos</h1>
+<p class="lead">Esse sistema foi criado para acompanhar a evolução de seus investimentos com base no extrato mensal recebido.</p>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2>Instituição Financeira</h2>
+    <p>Cadastro de bancos e corretoras na qual você tem ativos alocados. </p>
+    <p>
+      <a class="btn btn-default" href="{{ path('instituicao_financeira') }}" role="button">Lista »</a>
+      <a class="btn btn-primary" href="{{ path('instituicao_financeira_new') }}" role="button">Adicionar »</a>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <h2>Categoria de Ativo</h2>
+    <p>Cadastro de categorias de ativos com base na <a href="http://portal.anbima.com.br/fundos-de-investimento/classificacao-de-fundos/classificacao-anbima-de-fundos/Pages/classificacao.aspx" target="_blank">classificação Anbima de fundos.</a></p>
+    <p>
+      <a class="btn btn-default" href="{{ path('ativo_categoria') }}" role="button">Lista »</a>
+      <a class="btn btn-primary" href="{{ path('ativo_categoria_new') }}" role="button">Adicionar »</a>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <h2>Tipo de Taxa</h2>
+    <p>Cadastro de tipos de taxa. Ex: Pré-fixada, Pós-fixada, Mista</p>
+    <p>
+      <a class="btn btn-default" href="{{ path('taxa_tipo') }}" role="button">Lista »</a>
+      <a class="btn btn-primary" href="{{ path('taxa_tipo_new') }}" role="button">Adicionar »</a>
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <h2>Tipo de Ativo</h2>
+    <p>Cadastro de tipos de ativos. Ex: Fundos, Fundos Imobiliários, Títulos Públicos, Ações</p>
+    <p>
+      <a class="btn btn-default" href="{{ path('ativo_tipo') }}" role="button">Lista »</a>
+      <a class="btn btn-primary" href="{{ path('ativo_tipo_new') }}" role="button">Adicionar »</a>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <h2>Ativo</h2>
+    <p>Cadastro de ativos.</p>
+    <p>
+      <a class="btn btn-default" href="{{ path('ativo') }}" role="button">Lista »</a>
+      <a class="btn btn-primary" href="{{ path('ativo_new') }}" role="button">Adicionar »</a>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <h2>Posição Mensal</h2>
+    <p>Cadastro de posição mensal dos ativos alocados com base no extrato mensal. </p>
+    <p>
+      <a class="btn btn-default" href="{{ path('posicao') }}" role="button">Lista »</a>
+      <a class="btn btn-primary" href="{{ path('posicao_new') }}" role="button">Adicionar »</a>
+    </p>
+  </div>
+</div>

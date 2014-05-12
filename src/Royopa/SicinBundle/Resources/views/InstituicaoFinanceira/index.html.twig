@@ -17,7 +17,13 @@
             <tr>
                 <td><a href="{{ path('instituicao_financeira_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.cnpjFormatado }}</td>
-                <td>{{ entity.nome }}</td>
+                <td>
+                    {% if entity.link %}
+                    <a href="{{ entity.link }}" target="_blank">
+                        {{ entity.nome }}
+                    </a>
+                    {% endif %}
+                </td>
                 <td>
                 <ul>
                     <li>
@@ -41,3 +47,4 @@
         </li>
     </ul>
     {% endblock %}
+

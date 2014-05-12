@@ -15,10 +15,40 @@ class AtivoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tipo')
-            ->add('nome')
-            ->add('codigo')
-            ->add('dataVencimento')
+            ->add('tipo', null, array(
+                'label' => 'Tipo',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('nome', null, array(
+                'label' => 'Nome',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('codigo', null, array(
+                'label' => 'Código',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('dataVencimento', 'date', array(
+                'label' => 'Data de Vencimento',
+                'required' => false,
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr' => array(
+                    'class' => 'form-control datepicker'
+                    )
+                )
+            )
         ;
     }
 

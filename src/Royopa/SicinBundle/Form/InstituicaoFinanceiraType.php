@@ -10,16 +10,38 @@ class InstituicaoFinanceiraType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cnpj')
-            ->add('nome')
+            ->add('cnpj', null, array(
+                'label' => 'CNPJ',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('nome', null, array(
+                'label' => 'Nome',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('link', null, array(
+                'label' => 'Link',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

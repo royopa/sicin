@@ -36,6 +36,13 @@ class InstituicaoFinanceira
     private $nome;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", length=255, nullable=true)
+     */
+    private $link;
+
+    /**
      * Get id
      *
      * @return integer
@@ -132,4 +139,41 @@ class InstituicaoFinanceira
         return $this->mask($cnpj,'##.###.###/####-##');
     }
 
+    /**
+     * Sets the value of id.
+     *
+     * @param integer $id the id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of link.
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Sets the value of link.
+     *
+     * @param string $link the link
+     *
+     * @return self
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
 }

@@ -10,15 +10,22 @@ class AtivoCategoriaType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nome')
+            ->add('nome', null, array(
+                'label' => 'Nome',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

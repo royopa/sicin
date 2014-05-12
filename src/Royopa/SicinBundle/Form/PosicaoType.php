@@ -15,16 +15,88 @@ class PosicaoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('instituicaoFinanceira')
-            ->add('ativo')
-            ->add('dataReferencia')
-            ->add('quantidade')
-            ->add('valorMercado')
-            ->add('valorBrutoTotal')
-            ->add('valorLiquidoTotal')
-            ->add('valorRendimentoTotal')
-            ->add('percentualRendimentoTotal')
-            ->add('valorProvento')
+            ->add('instituicaoFinanceira', null, array(
+                'label' => 'Instituicao Financeira',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('ativo', null, array(
+                'label' => 'Ativo',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('dataReferencia', 'date', array(
+                'label' => 'Data de Referência',
+                'required' => true,
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr' => array(
+                    'class' => 'form-control datepicker'
+                    )
+                )
+            )
+            ->add('quantidade', null, array(
+                'label' => 'Quantidade',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('valorMercado', null, array(
+                'label' => 'Valor Mercado',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('valorBrutoTotal', null, array(
+                'label' => 'Valor Bruto Total',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('valorLiquidoTotal', null, array(
+                'label' => 'Valor Líquido Total',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('valorRendimentoTotal', null, array(
+                'label' => 'Valor Rendimento Total',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('percentualRendimentoTotal', null, array(
+                'label' => 'Percentual Rendimento Total',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
+            ->add('valorProvento', null, array(
+                'label' => 'Valor Provento',
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
+                )
+            )
         ;
     }
 

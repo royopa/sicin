@@ -545,7 +545,12 @@ class Posicao
         //faz todos os cálculos em relação ao mês anterior
         //$this->posicaoAnterior->valorBrutoTotal;
         $this->valorAplicadoMes = $this->valorBrutoTotal - $this->posicaoAnterior->valorBrutoTotal;
-        $this->valorRendimentoMes = $this->valorLiquidoTotal - $this->posicaoAnterior->valorLiquidoTotal - $this->valorAplicadoMes;
+
+        $this->valorRendimentoMes =
+            $this->valorLiquidoTotal -
+            $this->posicaoAnterior->valorLiquidoTotal -
+            $this->valorAplicadoMes +
+            $this->valorProvento;
 
         return $this;
     }

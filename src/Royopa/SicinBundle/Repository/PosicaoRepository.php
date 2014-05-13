@@ -29,12 +29,18 @@ class PosicaoRepository extends EntityRepository
         $query
             ->andWhere('p.ativo = :ativo')
             ->setParameter('ativo', $posicao->getAtivo());
+
+        $date = new \DateTime($posicao->getDataReferencia()->format('Y-m-d'));
+        //intervalo de um mês
+        $interval = new \DateInterval('P1D');
+        $date->sub($interval);
+
         //data referência anterior (a última disponível)
         $query
             ->andWhere('p.dataReferencia < :dataReferencia')
-            ->setParameter('dataReferencia', $posicao->getDataReferencia());
+            ->setParameter('dataReferencia', $date->format('Y-m-d'));
 
-        $query->orderBy('p.dataReferencia', 'ASC');
+        $query->orderBy('p.dataReferencia', 'DESC');
 
         $query->setMaxResults(1);
 

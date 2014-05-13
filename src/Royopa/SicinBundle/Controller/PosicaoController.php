@@ -29,15 +29,32 @@ class PosicaoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+        $dataReferencia = new \DateTime('2014-04-30');
+        $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findByDataReferencia($dataReferencia);
+
+        //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+
+        $valorBrutoTotal    = 0;
+        $valorLiquidoTotal  = 0;
+        $valorAplicadoMes   = 0;
+        $valorRendimentoMes = 0;
 
         foreach ($entities as $posicao) {
             $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
             $posicao->setPosicaoAnterior($posicaoAnterior);
+
+            $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
+            $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
+            $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
+            $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
         }
 
         return array(
             'entities' => $entities,
+            'valorBrutoTotal'    => $valorBrutoTotal,
+            'valorLiquidoTotal'  => $valorLiquidoTotal,
+            'valorAplicadoMes'   => $valorAplicadoMes,
+            'valorRendimentoMes' => $valorRendimentoMes,
         );
     }
     /**

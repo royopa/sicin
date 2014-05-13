@@ -3,19 +3,16 @@
 {% block body -%}
     <h1>Posição</h1>
 
-    <table class="datatable">
+    <table class="datatable table table-condensed table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>IF</th>
                 <th>Dt Ref.</th>
-                <th>Dt Ref anterior.</th>
                 <th>Ativo</th>
                 <th>Qtd</th>
                 <th>Vr Bruto Total</th>
                 <th>Vr Liq total</th>
-                <th>Vr Bruto Anterior</th>
-                <th>Vr Liq Anterior</th>
                 <th>Vr aplicado no mês</th>
                 <th>Vr rendimento mês</th>
                 <th>Actions</th>
@@ -26,14 +23,11 @@
             <tr>
                 <td><a href="{{ path('posicao_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.instituicaoFinanceira.nome }}</td>
-                <td>{% if entity.dataReferencia %}{{ entity.dataReferencia|date('d/m/Y') }}{% endif %}</td>
-                <td>{% if entity.posicaoAnterior.dataReferencia %}{{ entity.posicaoAnterior.dataReferencia|date('d/m/Y') }}{% endif %}</td>
-                <td>{{ entity.ativo.nome }}</td>
+                <td title="{% if entity.posicaoAnterior.dataReferencia %}{{ entity.posicaoAnterior.dataReferencia|date('d/m/Y') }}{% endif %}">{% if entity.dataReferencia %}{{ entity.dataReferencia|date('d/m/Y') }}{% endif %}</td>
+                <td title="{{ entity.ativo.nome }}">{{ entity.ativo.codigo }}</td>
                 <td>{{ entity.quantidade|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
-                <td>{{ entity.posicaoAnterior.valorBrutoTotal|number_format(2, ',', '.') }}</td>
-                <td>{{ entity.posicaoAnterior.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorAplicadoMes|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorRendimentoMes|number_format(2, ',', '.') }}</td>
                 <td>
@@ -49,6 +43,20 @@
             </tr>
         {% endfor %}
         </tbody>
+        <tfoot>
+          <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>{{ valorBrutoTotal|number_format(2, ',', '.') }}</th>
+              <th>{{ valorLiquidoTotal|number_format(2, ',', '.') }}</th>
+              <th>{{ valorAplicadoMes|number_format(2, ',', '.') }}</th>
+              <th>{{ valorRendimentoMes|number_format(2, ',', '.') }}</th>
+              <th></th>
+          </tr>
+        </tfoot>
     </table>
 
         <ul>

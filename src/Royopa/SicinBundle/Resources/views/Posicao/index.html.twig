@@ -7,14 +7,17 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IF</th>
                 <th>Dt Ref.</th>
+                <th>Dt Ref anterior.</th>
+                <th>Ativo</th>
                 <th>Qtd</th>
-                <th>Vr Mercado</th>
                 <th>Vr Bruto Total</th>
                 <th>Vr Liq total</th>
-                <th>Vr Rend Total</th>
-                <th>Pc Rend Total</th>
-                <th>Vr provento</th>
+                <th>Vr Bruto Anterior</th>
+                <th>Vr Liq Anterior</th>
+                <th>Vr aplicado no mês</th>
+                <th>Vr rendimento mês</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,14 +25,17 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('posicao_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.dataReferencia %}{{ entity.dataReferencia|date('d-m-Y') }}{% endif %}</td>
-                <td>{{ entity.quantidade }}</td>
-                <td>{{ entity.valorMercado }}</td>
-                <td>{{ entity.valorBrutoTotal }}</td>
-                <td>{{ entity.valorLiquidoTotal }}</td>
-                <td>{{ entity.valorRendimentoTotal }}</td>
-                <td>{{ entity.percentualRendimentoTotal }}</td>
-                <td>{{ entity.valorProvento }}</td>
+                <td>{{ entity.instituicaoFinanceira.nome }}</td>
+                <td>{% if entity.dataReferencia %}{{ entity.dataReferencia|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if entity.posicaoAnterior.dataReferencia %}{{ entity.posicaoAnterior.dataReferencia|date('d/m/Y') }}{% endif %}</td>
+                <td>{{ entity.ativo.nome }}</td>
+                <td>{{ entity.quantidade|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.posicaoAnterior.valorBrutoTotal|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.posicaoAnterior.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorAplicadoMes|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorRendimentoMes|number_format(2, ',', '.') }}</td>
                 <td>
                 <ul>
                     <li>

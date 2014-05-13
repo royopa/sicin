@@ -31,6 +31,11 @@ class PosicaoController extends Controller
 
         $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
 
+        foreach ($entities as $posicao) {
+            $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
+            $posicao->setPosicaoAnterior($posicaoAnterior);
+        }
+
         return array(
             'entities' => $entities,
         );

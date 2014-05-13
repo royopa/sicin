@@ -19,7 +19,7 @@ class PosicaoType extends AbstractType
                 'label' => 'Instituicao Financeira',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'
+                    'class' => 'form-control select2'
                     )
                 )
             )
@@ -27,7 +27,7 @@ class PosicaoType extends AbstractType
                 'label' => 'Ativo',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'
+                    'class' => 'form-control select2'
                     )
                 )
             )
@@ -43,15 +43,8 @@ class PosicaoType extends AbstractType
             )
             ->add('quantidade', null, array(
                 'label' => 'Quantidade',
+                'grouping' => true,
                 'required' => true,
-                'attr' => array(
-                    'class' => 'form-control'
-                    )
-                )
-            )
-            ->add('valorMercado', null, array(
-                'label' => 'Valor Mercado',
-                'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
                     )
@@ -73,16 +66,8 @@ class PosicaoType extends AbstractType
                     )
                 )
             )
-            ->add('valorRendimentoTotal', null, array(
-                'label' => 'Valor Rendimento Total',
-                'required' => false,
-                'attr' => array(
-                    'class' => 'form-control'
-                    )
-                )
-            )
-            ->add('percentualRendimentoTotal', null, array(
-                'label' => 'Percentual Rendimento Total',
+            ->add('valorMercado', null, array(
+                'label' => 'Valor Mercado',
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
@@ -90,7 +75,7 @@ class PosicaoType extends AbstractType
                 )
             )
             ->add('valorProvento', null, array(
-                'label' => 'Valor Provento',
+                'label' => 'Valor Proventos',
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control'

@@ -3,6 +3,7 @@
 namespace Royopa\SicinBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Royopa\SicinBundle\Entity\Posicao;
 
 /**
  * PosicaoRepository
@@ -12,4 +13,37 @@ use Doctrine\ORM\EntityRepository;
  */
 class PosicaoRepository extends EntityRepository
 {
+    /**
+     * Pega a posição do mês anterior à posição informada
+     *
+     * @return array[]
+     */
+    public function getPosicaoAnterior($posicao)
+    {
+        $query = $this->createQueryBuilder('p');
+        //instituicao financeira
+        $query
+            ->andWhere('p.instituicaoFinanceira = :instituicaoFinanceira')
+            ->setParameter('instituicaoFinanceira', $posicao->getInstituicaoFinanceira());
+        //ativo
+        $query
+            ->andWhere('p.ativo = :ativo')
+            ->setParameter('ativo', $posicao->getAtivo());
+        //data referência anterior (a última disponível)
+        $query
+            ->andWhere('p.dataReferencia < :dataReferencia')
+            ->setParameter('dataReferencia', $posicao->getDataReferencia());
+
+        $query->orderBy('p.dataReferencia', 'ASC');
+
+        $query->setMaxResults(1);
+
+        try {
+            return $query
+                    ->getQuery()
+                    ->getSingleResult();
+            } catch (\Doctrine\ORM\NoResultException $e) {
+            return new Posicao();
+        }
+    }
 }

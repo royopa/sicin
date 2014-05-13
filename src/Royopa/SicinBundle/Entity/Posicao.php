@@ -31,14 +31,14 @@ class Posicao
     /**
      * @var integer
      *
-     * @ORM\Column(name="quantidade", type="integer")
+     * @ORM\Column(name="quantidade", type="float")
      */
     private $quantidade;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="vr_mercado", type="float")
+     * @ORM\Column(name="vr_mercado", type="float", nullable=true)
      */
     private $valorMercado;
 
@@ -53,6 +53,12 @@ class Posicao
      *
      */
     private $valorLiquidoMes;
+
+    /**
+     * @var float
+     *
+     */
+    private $valorAplicadoMes;
 
     /**
      * @var float
@@ -77,14 +83,12 @@ class Posicao
     /**
      * @var float
      *
-     * @ORM\Column(name="vr_rendimento_total", type="float")
      */
     private $valorRendimentoTotal;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="pc_rendimento_total", type="float")
      */
     private $percentualRendimentoTotal;
 
@@ -103,7 +107,7 @@ class Posicao
     /**
      * @var float
      *
-     * @ORM\Column(name="vr_provento", type="float")
+     * @ORM\Column(name="vr_provento", type="float", nullable=true)
      */
     private $valorProvento;
 
@@ -111,7 +115,7 @@ class Posicao
      * @var \Royopa\SicinBundle\Entity\Posicao
      *
      */
-    private $posicaoMesAnterior;
+    private $posicaoAnterior;
 
     /**
      * @var \Royopa\SicinBundle\Entity\Ativo
@@ -184,7 +188,7 @@ class Posicao
     /**
      * Gets the value of quantidade.
      *
-     * @return integer
+     * @return float
      */
     public function getQuantidade()
     {
@@ -194,7 +198,7 @@ class Posicao
     /**
      * Sets the value of quantidade.
      *
-     * @param integer $quantidade the quantidade
+     * @param float $quantidade the quantidade
      *
      * @return self
      */
@@ -470,30 +474,6 @@ class Posicao
     }
 
     /**
-     * Gets the value of posicaoMesAnterior.
-     *
-     * @return \Royopa\SicinBundle\Entity\Posicao
-     */
-    public function getPosicaoMesAnterior()
-    {
-        return $this->posicaoMesAnterior;
-    }
-
-    /**
-     * Sets the value of posicaoMesAnterior.
-     *
-     * @param \Royopa\SicinBundle\Entity\Posicao $posicaoMesAnterior the posicao mes anterior
-     *
-     * @return self
-     */
-    public function setPosicaoMesAnterior(\Royopa\SicinBundle\Entity\Posicao $posicaoMesAnterior)
-    {
-        $this->posicaoMesAnterior = $posicaoMesAnterior;
-
-        return $this;
-    }
-
-    /**
      * Gets the value of ativo.
      *
      * @return \Royopa\SicinBundle\Entity\Ativo
@@ -537,6 +517,59 @@ class Posicao
     public function setInstituicaoFinanceira(\Royopa\SicinBundle\Entity\InstituicaoFinanceira $instituicaoFinanceira)
     {
         $this->instituicaoFinanceira = $instituicaoFinanceira;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of posicaoAnterior.
+     *
+     * @return \Royopa\SicinBundle\Entity\Posicao
+     */
+    public function getPosicaoAnterior()
+    {
+        return $this->posicaoAnterior;
+    }
+
+    /**
+     * Sets the value of posicaoAnterior.
+     *
+     * @param \Royopa\SicinBundle\Entity\Posicao $posicaoAnterior the posicao anterior
+     *
+     * @return self
+     */
+    public function setPosicaoAnterior(\Royopa\SicinBundle\Entity\Posicao $posicaoAnterior)
+    {
+        $this->posicaoAnterior = $posicaoAnterior;
+
+        //faz todos os cálculos em relação ao mês anterior
+        //$this->posicaoAnterior->valorBrutoTotal;
+        $this->valorAplicadoMes = $this->valorBrutoTotal - $this->posicaoAnterior->valorBrutoTotal;
+        $this->valorRendimentoMes = $this->valorLiquidoTotal - $this->posicaoAnterior->valorLiquidoTotal - $this->valorAplicadoMes;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of valorAplicadoMes.
+     *
+     * @return float
+     */
+    public function getValorAplicadoMes()
+    {
+        return $this->valorAplicadoMes;
+    }
+
+    /**
+     * Sets the value of valorAplicadoMes.
+     *
+     * @param float $valorAplicadoMes the valor aplicado mes
+     *
+     * @return self
+     */
+    public function setValorAplicadoMes($valorAplicadoMes)
+    {
+        $this->valorAplicadoMes = $valorAplicadoMes;
 
         return $this;
     }

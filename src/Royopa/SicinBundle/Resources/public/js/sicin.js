@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
 
     $('.voltar').click(function(){
         parent.history.back();
@@ -19,5 +19,9 @@ $(function() {
         nextText: 'Próximo',
         prevText: 'Anterior',
         beforeShowDay: $.datepicker.noWeekends,
+    });
+
+    $(".select2").select2({
+        allowClear: true
     });
 });

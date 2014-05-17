@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\PosicaoType;
+use Royopa\SicinBundle\Form\ConsultaDataType;
 
 /**
  * Posicao controller.
@@ -25,37 +26,57 @@ class PosicaoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new ConsultaDataType(), null, array(
+            'action' => $this->generateUrl('posicao'),
+            'method' => 'GET',
+        ));
 
-        $dataReferencia = new \DateTime('2014-04-30');
-        $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findByDataReferencia($dataReferencia);
+        $form->handleRequest($request);
 
-        //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+        if ($form->isValid()) {
 
-        $valorBrutoTotal    = 0;
-        $valorLiquidoTotal  = 0;
-        $valorAplicadoMes   = 0;
-        $valorRendimentoMes = 0;
+            $data = $form->getData();
 
-        foreach ($entities as $posicao) {
-            $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
-            $posicao->setPosicaoAnterior($posicaoAnterior);
+            $dataReferencia = $data['date'];
 
-            $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
-            $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
-            $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
-            $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
+            $em = $this->getDoctrine()->getManager();
+
+            $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findByDataReferencia($dataReferencia);
+
+            //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+
+            $valorBrutoTotal    = 0;
+            $valorLiquidoTotal  = 0;
+            $valorAplicadoMes   = 0;
+            $valorRendimentoMes = 0;
+
+            foreach ($entities as $posicao) {
+                $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
+                $posicao->setPosicaoAnterior($posicaoAnterior);
+
+                $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
+                $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
+                $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
+                $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
+            }
+
+            return $this->render('RoyopaSicinBundle:Posicao:index.html.twig', array(
+                'entities' => $entities,
+                'valorBrutoTotal'    => $valorBrutoTotal,
+                'valorLiquidoTotal'  => $valorLiquidoTotal,
+                'valorAplicadoMes'   => $valorAplicadoMes,
+                'valorRendimentoMes' => $valorRendimentoMes,
+            ));
+
         }
 
-        return array(
-            'entities' => $entities,
-            'valorBrutoTotal'    => $valorBrutoTotal,
-            'valorLiquidoTotal'  => $valorLiquidoTotal,
-            'valorAplicadoMes'   => $valorAplicadoMes,
-            'valorRendimentoMes' => $valorRendimentoMes,
-        );
+        return $this->render('RoyopaSicinBundle:Form:form_consulta_data.html.twig', array(
+            'title'    => 'Consulta posição de investimentos',
+            'subtitle' => 'Utilize o formulário abaixo para consultar a posição de investimetnos na data solicitada.',
+            'form'     => $form->createView(),
+        ));
     }
     /**
      * Creates a new Posicao entity.

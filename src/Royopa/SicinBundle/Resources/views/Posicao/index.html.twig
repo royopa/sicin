@@ -1,7 +1,15 @@
 {% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
 
 {% block body -%}
-    <h1>Posição</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Posição</h1>
+            <p class="text-right">
+                <a class="btn btn-default btn-success" href="{{ path('posicao_new') }}">Nova posição</a>
+            </p>
+        </div>
 
     <table class="datatable table table-condensed table-striped">
         <thead>
@@ -57,13 +65,7 @@
               <th></th>
           </tr>
         </tfoot>
-    </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('posicao_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+      </table>
+    </div>
+</div>
+{% endblock %}

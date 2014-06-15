@@ -3,6 +3,7 @@
 namespace Royopa\SicinBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -145,7 +146,7 @@ class PosicaoController extends Controller
     /**
      * Finds and displays a Posicao entity.
      *
-     * @Route("/{id}", name="posicao_show")
+     * @Route("/{id}/show", name="posicao_show")
      * @Method("GET")
      * @Template()
      */
@@ -189,7 +190,7 @@ class PosicaoController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -236,12 +237,17 @@ class PosicaoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Posição alterada com sucesso'
+            );
+
             return $this->redirect($this->generateUrl('posicao_edit', array('id' => $id)));
         }
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -286,5 +292,59 @@ class PosicaoController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Gets the last position for ativo.
+     *
+     * @Route("/get_ultima_posicao", name="get_ultima_posicao")
+     * @Method("GET")
+     */
+    public function getUltimaPosicaoAction(Request $request)
+    {
+        $if_id    = $request->query->get('if_id');
+        $ativo_id = $request->query->get('ativo_id');
+
+        $em =  $this->get('doctrine')->getManager();
+
+        $connection = $em->getConnection();
+
+        $statement = $connection->prepare(
+            "
+            SELECT
+                vr_bruto_total,
+                quantidade
+            FROM
+                POSICAO
+            WHERE
+                if_id = :if_id AND
+                ativo_id = :ativo_id
+            ORDER BY
+                dt_referencia
+            DESC
+            LIMIT
+                1
+            "
+        );
+
+        $statement->bindValue('if_id', $if_id);
+        $statement->bindValue('ativo_id', $ativo_id);
+        $statement->execute();
+
+        while ($row = $statement->fetch()) {
+            $data = array(
+                'vr_bruto_total' => number_format($row['vr_bruto_total'],2,",",""),
+                'quantidade' => number_format($row['quantidade'],0,",","")
+                );
+        }
+
+        // create a JSON-response with a 200 status code
+        $response = new JsonResponse($data);
+
+        if ($request->query->get('callback')) {
+            $response->setCallback($request->query->get('callback'));
+        }
+
+        return $response;
     }
 }

@@ -52,4 +52,39 @@ class PosicaoRepository extends EntityRepository
             return new Posicao();
         }
     }
+
+    /**
+     * Pega a posição do mês anterior à posição informada
+     *
+     * @return array[]
+     */
+    public function findPosicaoSintetica(\DateTime $dataReferencia)
+    {
+        $query = $this->createQueryBuilder('p');
+        //instituicao financeira
+        $query
+            ->andWhere('p.instituicaoFinanceira = :instituicaoFinanceira')
+            ->setParameter('instituicaoFinanceira', $posicao->getInstituicaoFinanceira());
+        //ativo
+        $query
+            ->andWhere('p.ativo = :ativo')
+            ->setParameter('ativo', $posicao->getAtivo());
+
+        //data referência
+        $query
+            ->andWhere('p.dataReferencia = :dataReferencia')
+            ->setParameter('dataReferencia', $date->format('Y-m-d'));
+
+        $query->orderBy('p.dataReferencia', 'DESC');
+
+        $query->setMaxResults(1);
+
+        try {
+            return $query
+                    ->getQuery()
+                    ->getSingleResult();
+            } catch (\Doctrine\ORM\NoResultException $e) {
+            return new Posicao();
+        }
+    }    
 }

@@ -19,19 +19,18 @@ use Royopa\SicinBundle\Form\ConsultaDataType;
  */
 class PosicaoController extends Controller
 {
-
     /**
-     * Lists all Posicao entities.
+     * Lists all Posicao sintética entities.
      *
-     * @Route("/", name="posicao")
-     * @Method("GET")
+     * @Route("/sintetica", name="posicao_sintetica")
+     * @Method({"POST","GET"})
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function sinteticaIndexAction(Request $request)
     {
         $form = $this->createForm(new ConsultaDataType(), null, array(
             'action' => $this->generateUrl('posicao'),
-            'method' => 'GET',
+            'method' => 'POST',
         ));
 
         $form->handleRequest($request);
@@ -44,7 +43,74 @@ class PosicaoController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findByDataReferencia($dataReferencia);
+            $entities =
+                $em
+                    ->getRepository('RoyopaSicinBundle:Posicao')
+                    ->findPosicaoSintetica($dataReferencia);
+
+            //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+
+            $valorBrutoTotal    = 0;
+            $valorLiquidoTotal  = 0;
+            $valorAplicadoMes   = 0;
+            $valorRendimentoMes = 0;
+
+            foreach ($entities as $posicao) {
+                $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
+                $posicao->setPosicaoAnterior($posicaoAnterior);
+
+                $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
+                $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
+                $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
+                $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
+            }
+
+            return $this->render('RoyopaSicinBundle:Posicao:sintetica_list.html.twig', array(
+                'dataReferencia'     => $dataReferencia,
+                'entities'           => $entities,
+                'valorBrutoTotal'    => $valorBrutoTotal,
+                'valorLiquidoTotal'  => $valorLiquidoTotal,
+                'valorAplicadoMes'   => $valorAplicadoMes,
+                'valorRendimentoMes' => $valorRendimentoMes
+            ));
+
+        }
+
+        return $this->render('RoyopaSicinBundle:Form:form_consulta_data.html.twig', array(
+            'title'    => 'Consulta posição sintética de investimentos',
+            'subtitle' => 'Utilize o formulário abaixo para consultar a posição sintética de investimentos.',
+            'form'     => $form->createView(),
+        ));
+    }
+
+    /**
+     * Lists all Posicao entities.
+     *
+     * @Route("/", name="posicao")
+     * @Method({"POST","GET"})
+     * @Template()
+     */
+    public function indexAction(Request $request)
+    {
+        $form = $this->createForm(new ConsultaDataType(), null, array(
+            'action' => $this->generateUrl('posicao'),
+            'method' => 'POST',
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $data = $form->getData();
+
+            $dataReferencia = $data['date'];
+
+            $em = $this->getDoctrine()->getManager();
+
+            $entities =
+                $em
+                    ->getRepository('RoyopaSicinBundle:Posicao')
+                    ->findByDataReferencia($dataReferencia);
 
             //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
 
@@ -64,11 +130,12 @@ class PosicaoController extends Controller
             }
 
             return $this->render('RoyopaSicinBundle:Posicao:index.html.twig', array(
-                'entities' => $entities,
+                'dataReferencia'     => $dataReferencia,
+                'entities'           => $entities,
                 'valorBrutoTotal'    => $valorBrutoTotal,
                 'valorLiquidoTotal'  => $valorLiquidoTotal,
                 'valorAplicadoMes'   => $valorAplicadoMes,
-                'valorRendimentoMes' => $valorRendimentoMes,
+                'valorRendimentoMes' => $valorRendimentoMes
             ));
 
         }
@@ -79,6 +146,7 @@ class PosicaoController extends Controller
             'form'     => $form->createView(),
         ));
     }
+
     /**
      * Creates a new Posicao entity.
      *

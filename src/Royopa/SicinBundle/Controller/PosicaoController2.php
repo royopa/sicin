@@ -87,46 +87,66 @@ class PosicaoController extends Controller
      * Lists all Posicao entities.
      *
      * @Route("/", name="posicao")
-     * @Method("GET")
+     * @Method({"POST","GET"})
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $dataReferencia = new \DateTime('2014-06-30');
+        $form = $this->createForm(new ConsultaDataType(), null, array(
+            'action' => $this->generateUrl('posicao'),
+            'method' => 'POST',
+        ));
 
-        $em = $this->getDoctrine()->getManager();
+        $form->handleRequest($request);
 
-        $entities =
-            $em
-                ->getRepository('RoyopaSicinBundle:Posicao')
-                ->findByDataReferencia($dataReferencia);
+        if ($form->isValid()) {
 
-        $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+            $data = $form->getData();
 
-        $valorBrutoTotal    = 0;
-        $valorLiquidoTotal  = 0;
-        $valorAplicadoMes   = 0;
-        $valorRendimentoMes = 0;
+            $dataReferencia = $data['date'];
 
-        foreach ($entities as $posicao) {
-            $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
-            $posicao->setPosicaoAnterior($posicaoAnterior);
+            $em = $this->getDoctrine()->getManager();
 
-            $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
-            $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
-            $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
-            $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
+            $entities =
+                $em
+                    ->getRepository('RoyopaSicinBundle:Posicao')
+                    ->findByDataReferencia($dataReferencia);
+
+            //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
+
+            $valorBrutoTotal    = 0;
+            $valorLiquidoTotal  = 0;
+            $valorAplicadoMes   = 0;
+            $valorRendimentoMes = 0;
+
+            foreach ($entities as $posicao) {
+                $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
+                $posicao->setPosicaoAnterior($posicaoAnterior);
+
+                $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
+                $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
+                $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
+                $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
+            }
+
+            return $this->render('RoyopaSicinBundle:Posicao:index.html.twig', array(
+                'dataReferencia'     => $dataReferencia,
+                'entities'           => $entities,
+                'valorBrutoTotal'    => $valorBrutoTotal,
+                'valorLiquidoTotal'  => $valorLiquidoTotal,
+                'valorAplicadoMes'   => $valorAplicadoMes,
+                'valorRendimentoMes' => $valorRendimentoMes
+            ));
+
         }
 
-        return array(
-            'dataReferencia'     => $dataReferencia,
-            'entities'           => $entities,
-            'valorBrutoTotal'    => $valorBrutoTotal,
-            'valorLiquidoTotal'  => $valorLiquidoTotal,
-            'valorAplicadoMes'   => $valorAplicadoMes,
-            'valorRendimentoMes' => $valorRendimentoMes
-        );
+        return $this->render('RoyopaSicinBundle:Form:form_consulta_data.html.twig', array(
+            'title'    => 'Consulta posição de investimentos',
+            'subtitle' => 'Utilize o formulário abaixo para consultar a posição de investimetnos na data solicitada.',
+            'form'     => $form->createView(),
+        ));
     }
+
     /**
      * Creates a new Posicao entity.
      *
@@ -140,32 +160,29 @@ class PosicaoController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
-            return array(
-                'entity' => $entity,
-                'form'   => $form->createView(),
-            );
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            var_dump($entity);
+            
+            return $this->redirect($this->generateUrl('posicao_show', array('id' => $entity->getId())));
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($entity);
-        $em->flush();
-
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'Posição salva com sucesso!'
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
         );
-
-        return $this->redirect($this->generateUrl('posicao_show', array('id' => $entity->getId())));
     }
 
     /**
-     * Creates a form to create a Posicao entity.
-     *
-     * @param Posicao $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
+    * Creates a form to create a Posicao entity.
+    *
+    * @param Posicao $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
     private function createCreateForm(Posicao $entity)
     {
         $form = $this->createForm(new PosicaoType(), $entity, array(
@@ -199,7 +216,7 @@ class PosicaoController extends Controller
     /**
      * Finds and displays a Posicao entity.
      *
-     * @Route("/{id}", name="posicao_show")
+     * @Route("/{id}/show", name="posicao_show")
      * @Method("GET")
      * @Template()
      */
@@ -243,7 +260,7 @@ class PosicaoController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -291,8 +308,8 @@ class PosicaoController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add(
-                'notice',
-                'Posição salva com sucesso!'
+                'success',
+                'Posição alterada com sucesso'
             );
 
             return $this->redirect($this->generateUrl('posicao_edit', array('id' => $id)));
@@ -300,7 +317,7 @@ class PosicaoController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -346,6 +363,7 @@ class PosicaoController extends Controller
             ->getForm()
         ;
     }
+
     /**
      * Gets the last position for ativo.
      *
@@ -398,5 +416,5 @@ class PosicaoController extends Controller
         }
 
         return $response;
-    }    
+    }
 }

@@ -82,13 +82,13 @@ $(function() {
         if_id    = $('#royopa_sicinbundle_posicao_instituicaoFinanceira').val();
         ativo_id = $('#royopa_sicinbundle_posicao_ativo').val();
 
-        var API = "http://localhost/sicin/web/app.php/posicao/get_ultima_posicao?callback=?";
+        var API = "{{ app.request.schemeAndHttpHost }}/sicin/web/app.php/posicao/get_ultima_posicao?callback=?";
 
         $.getJSON( API, { if_id: $('#royopa_sicinbundle_posicao_instituicaoFinanceira').val(), ativo_id: $('#royopa_sicinbundle_posicao_ativo').val() } )
             .done(function( data ) {
                 $('#royopa_sicinbundle_posicao_valorBrutoTotal').val(data.vr_bruto_total);
                 $('#royopa_sicinbundle_posicao_quantidade').val(data.quantidade);
-                //alert( "Valor carregado com sucesso!");
+                alert( "Valores carregados com sucesso!");
             })
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;

@@ -6,7 +6,10 @@
     <div class="col-md-12">
         <div class="page-header">
             <h1>
-              Posição {{ dataReferencia|date('d/m/Y') }}
+              Posição 
+              {% if dataReferencia is defined %}
+                {{ dataReferencia|date('d/m/Y') }}
+              {% endif %}
             </h1>
             <p class="text-right">
                 <a class="btn btn-default btn-success" href="{{ path('posicao_new') }}">Nova posição</a>
@@ -17,6 +20,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Data</th>
                 <th>Ativo</th>
                 <th>Vr Apl Tot</th>
                 <th>Vr Liq Tot</th>
@@ -28,6 +32,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('posicao_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.dataReferencia.format('d/m/Y') }}</td>
                 <td title="{{ entity.instituicaoFinanceira.nome }} - {{ entity.ativo.nome }} - Quantidade: {{ entity.quantidade|number_format(2, ',', '.') }}">{{ entity.ativo.codigo }}</td>
                 <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
@@ -38,6 +43,7 @@
         </tbody>
         <tfoot>
           <tr>
+              <th></th>
               <th></th>
               <th></th>
               <th>{{ valorBrutoTotal|number_format(2, ',', '.') }}</th>

@@ -15,33 +15,33 @@
         {% endif %}
       </div>
 
-      {{ form_start(form) }}
+      {{ form_start(edit_form) }}
 
-      {% if form_errors(form) %}
+      {% if form_errors(edit_form) %}
         <div class="alert alert-dismissable alert-danger">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          {{ form_errors(form) }}
+          {{ form_errors(edit_form) }}
         </div>
         {% endif %}
 
     <div class="row">
       <div class="col-md-2">
-        {{ form_row(form.dataReferencia) }}
+        {{ form_row(edit_form.dataReferencia) }}
       </div>
       <div class="col-md-3">
-        {{ form_row(form.instituicaoFinanceira) }}
+        {{ form_row(edit_form.instituicaoFinanceira) }}
       </div>
       <div class="col-md-7">
-        {{ form_row(form.ativo) }}
+        {{ form_row(edit_form.ativo) }}
       </div>
     </div>
     <p></p>
     <div class="row">
       <div class="col-md-1">
-        {{ form_row(form.quantidade) }}
+        {{ form_row(edit_form.quantidade) }}
       </div>
       <div class="col-md-2">
-        {{ form_row(form.valorBrutoTotal) }}
+        {{ form_row(edit_form.valorBrutoTotal) }}
       </div>
       <div class="col-md-3">
         <div>
@@ -55,22 +55,22 @@
     <p></p>
     <div class="row">
       <div class="col-md-2">
-        {{ form_row(form.valorLiquidoTotal) }}
+        {{ form_row(edit_form.valorLiquidoTotal) }}
       </div>
       <div class="col-md-2">
-        {{ form_row(form.valorMercado) }}
+        {{ form_row(edit_form.valorMercado) }}
       </div>
       <div class="col-md-2">
-        {{ form_row(form.valorProvento) }}
+        {{ form_row(edit_form.valorProvento) }}
       </div>
     </div>
     <p></p>
     <div class="row">
       <div class="col-md-2">
-        {{ form_row(form.submit) }}
+        {{ form_row(edit_form.submit) }}
       </div>
     </div>
-      {{ form_rest(form) }}
+      {{ form_rest(edit_form) }}
       </form>
   </div>
 </div>
@@ -84,13 +84,13 @@ $(function() {
         if_id    = $('#royopa_sicinbundle_posicao_instituicaoFinanceira').val();
         ativo_id = $('#royopa_sicinbundle_posicao_ativo').val();
 
-        var API = "http://localhost/sicin/web/app.php/posicao/get_ultima_posicao?callback=?";
+        var API = "{{ app.request.schemeAndHttpHost }}/sicin/web/app.php/posicao/get_ultima_posicao?callback=?";
 
         $.getJSON( API, { if_id: $('#royopa_sicinbundle_posicao_instituicaoFinanceira').val(), ativo_id: $('#royopa_sicinbundle_posicao_ativo').val() } )
             .done(function( data ) {
                 $('#royopa_sicinbundle_posicao_valorBrutoTotal').val(data.vr_bruto_total);
                 $('#royopa_sicinbundle_posicao_quantidade').val(data.quantidade);
-                //alert( "Valor carregado com sucesso!");
+                alert( "Valores carregados com sucesso!");
             })
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;

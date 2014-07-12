@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Ativo;
 use Royopa\SicinBundle\Form\AtivoType;
 
@@ -14,6 +15,7 @@ use Royopa\SicinBundle\Form\AtivoType;
  * Ativo controller.
  *
  * @Route("/ativo")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class AtivoController extends Controller
 {

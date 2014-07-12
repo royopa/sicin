@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\PosicaoType;
 use Royopa\SicinBundle\Form\ConsultaDataType;
@@ -16,6 +17,7 @@ use Royopa\SicinBundle\Form\ConsultaDataType;
  * Posicao controller.
  *
  * @Route("/posicao")
+ * @Security("has_role('ROLE_ADMIN')") 
  */
 class PosicaoController extends Controller
 {

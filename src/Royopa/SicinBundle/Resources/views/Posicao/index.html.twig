@@ -26,6 +26,7 @@
                 <th>Vr Liq Tot</th>
                 <th>Vr Apl Mês</th>
                 <th>Vr Rend Mês</th>
+                <th>Perc Rend Mês</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
                 <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorAplicadoMes|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorRendimentoMes|number_format(2, ',', '.') }}</td>
+                <td>{{ ((entity.valorRendimentoMes/(entity.valorBrutoTotal))*100)|number_format(2, ',', '.') }} %</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -50,6 +52,7 @@
               <th>{{ valorLiquidoTotal|number_format(2, ',', '.') }}</th>
               <th>{{ valorAplicadoMes|number_format(2, ',', '.') }}</th>
               <th>{{ valorRendimentoMes|number_format(2, ',', '.') }}</th>
+              <th></th>
           </tr>
         </tfoot>
       </table>

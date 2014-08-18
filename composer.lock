@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ddeboer/data-import",
-            "version": "0.15.1",
+            "version": "0.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ddeboer/data-import.git",
-                "reference": "1f5860972fdce2d1185499af3405d4633b658522"
+                "reference": "72d4f9315600eb2e5ec2b8688b3bdd5e00dc2ef5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ddeboer/data-import/zipball/1f5860972fdce2d1185499af3405d4633b658522",
-                "reference": "1f5860972fdce2d1185499af3405d4633b658522",
+                "url": "https://api.github.com/repos/ddeboer/data-import/zipball/72d4f9315600eb2e5ec2b8688b3bdd5e00dc2ef5",
+                "reference": "72d4f9315600eb2e5ec2b8688b3bdd5e00dc2ef5",
                 "shasum": ""
             },
             "require": {
@@ -56,13 +56,12 @@
             ],
             "authors": [
                 {
-                    "name": "David de Boer",
-                    "email": "david@ddeboer.nl",
-                    "homepage": "http://ddeboer.nl"
-                },
-                {
                     "name": "The community",
                     "homepage": "https://github.com/ddeboer/data-import/graphs/contributors"
+                },
+                {
+                    "name": "David de Boer",
+                    "email": "david@ddeboer.nl"
                 }
             ],
             "description": "Import data from, and export data to, a range of file formats and media",
@@ -74,7 +73,7 @@
                 "export",
                 "import"
             ],
-            "time": "2014-06-18 11:39:08"
+            "time": "2014-07-28 11:57:13"
         },
         {
             "name": "ddeboer/data-import-bundle",
@@ -180,7 +179,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -301,7 +300,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -398,7 +397,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -601,7 +600,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -655,7 +654,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -750,12 +749,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "ef7ca325929ff102fff521653a2e3b88c7a40361"
+                "reference": "27a84cec3ea4daa32cd6fe308c0847ca9644f588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/ef7ca325929ff102fff521653a2e3b88c7a40361",
-                "reference": "ef7ca325929ff102fff521653a2e3b88c7a40361",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/27a84cec3ea4daa32cd6fe308c0847ca9644f588",
+                "reference": "27a84cec3ea4daa32cd6fe308c0847ca9644f588",
                 "shasum": ""
             },
             "require": {
@@ -796,13 +795,12 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Thibault Duplessis",
-                    "email": "thibault.duplessis@gmail.com",
-                    "homepage": "http://ornicar.github.com"
-                },
-                {
                     "name": "FriendsOfSymfony Community",
                     "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+                },
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com"
                 }
             ],
             "description": "Symfony FOSUserBundle",
@@ -810,7 +808,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-07-09 10:33:42"
+            "time": "2014-08-04 23:04:17"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1412,17 +1410,16 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.6.0",
-            "target-dir": "Symfony/Bundle/MonologBundle",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "e1d4aa99c7440b11e9dfbfef7ed63084401dbc6a"
+                "reference": "227bbeefe30f2d95e3fe5fbd1ccda414287a957a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/e1d4aa99c7440b11e9dfbfef7ed63084401dbc6a",
-                "reference": "e1d4aa99c7440b11e9dfbfef7ed63084401dbc6a",
+                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
+                "reference": "227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
                 "shasum": ""
             },
             "require": {
@@ -1444,8 +1441,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Symfony\\Bundle\\MonologBundle": ""
+                "psr-4": {
+                    "Symfony\\Bundle\\MonologBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1454,14 +1451,12 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony MonologBundle",
@@ -1470,7 +1465,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2014-06-04 16:49:13"
+            "time": "2014-07-21 00:36:06"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -1531,16 +1526,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.1",
+            "version": "v2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0"
+                "reference": "f077a238c781f845487a7c81fea8033ccd0e6a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/e3d2844abc988bc467bb1593cd340700096b0ac0",
-                "reference": "e3d2844abc988bc467bb1593cd340700096b0ac0",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f077a238c781f845487a7c81fea8033ccd0e6a02",
+                "reference": "f077a238c781f845487a7c81fea8033ccd0e6a02",
                 "shasum": ""
             },
             "require": {
@@ -1628,14 +1623,12 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "The Symfony PHP framework",
@@ -1643,7 +1636,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-07-08 14:42:08"
+            "time": "2014-08-06 07:03:01"
         },
         {
             "name": "twig/extensions",
@@ -1733,7 +1726,7 @@
                     "role": "Lead Developer"
                 },
                 {
-                    "name": "Armin Ronacher2",
+                    "name": "Armin Ronacher",
                     "email": "armin.ronacher@active-4.com",
                     "role": "Project Founder"
                 },
@@ -1761,6 +1754,7 @@
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
     },

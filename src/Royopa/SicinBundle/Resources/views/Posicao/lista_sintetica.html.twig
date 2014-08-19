@@ -1,0 +1,42 @@
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
+
+{% block body -%}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>
+              Posição Sintética {{ mes }}/{{ ano }}
+            </h1>
+            <p class="text-right">
+                <a class="btn btn-default btn-success" href="{{ path('posicao_new') }}">Nova posição</a>
+            </p>
+        </div>
+
+    <table class="datatable table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Valor proventos</th>
+                <th>Valor Bruto</th>
+                <th>Valor Líquido</th>
+                <th>Valor Mercado</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.dataReferencia.format('d/m/Y') }}</td>
+                <td>{{ entity.nome }}</td>
+                <td>{{ entity.valorProvento|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorMercado|number_format(2, ',', '.') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+{% endblock %}

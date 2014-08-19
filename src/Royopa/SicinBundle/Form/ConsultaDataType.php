@@ -22,7 +22,7 @@ class ConsultaDataType extends AbstractType
                 'label'    => 'Data*',
                 'required' => true,
                 'widget'   => 'single_text',
-                'format'   => 'dd/MM/yyyy',
+                'format'   => 'MM/yyyy',
                 'attr'     => array(
                     'class' => 'form-control datepicker',
                     'value' => $date->format('d/m/Y')

@@ -3,6 +3,7 @@
 namespace Royopa\SicinBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -12,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\PosicaoType;
 use Royopa\SicinBundle\Form\ConsultaDataType;
+use Royopa\SicinBundle\Form\ConsultaPosicaoSinteticaType;
 
 /**
  * Posicao controller.
@@ -26,63 +28,42 @@ class PosicaoController extends Controller
      *
      * @Route("/sintetica", name="posicao_sintetica")
      * @Method({"POST","GET"})
-     * @Template()
+     * @Template("RoyopaSicinBundle:Posicao:lista_sintetica.html.twig")
      */
     public function sinteticaIndexAction(Request $request)
     {
-        $form = $this->createForm(new ConsultaDataType(), null, array(
+        $form = $this->createForm(new ConsultaPosicaoSinteticaType(), null, array(
             'action' => $this->generateUrl('posicao_sintetica'),
             'method' => 'POST',
         ));
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-
-            $data = $form->getData();
-
-            $dataReferencia = $data['date'];
-
-            $em = $this->getDoctrine()->getManager();
-
-            $entities =
-                $em
-                    ->getRepository('RoyopaSicinBundle:Posicao')
-                    ->findPosicaoSintetica($dataReferencia);
-
-            //$entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
-
-            $valorBrutoTotal    = 0;
-            $valorLiquidoTotal  = 0;
-            $valorAplicadoMes   = 0;
-            $valorRendimentoMes = 0;
-
-            foreach ($entities as $posicao) {
-                $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
-                $posicao->setPosicaoAnterior($posicaoAnterior);
-
-                $valorBrutoTotal    = $valorBrutoTotal + $posicao->getValorBrutoTotal();
-                $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
-                $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
-                $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
-            }
-
-            return $this->render('RoyopaSicinBundle:Posicao:sintetica_list.html.twig', array(
-                'dataReferencia'     => $dataReferencia,
-                'entities'           => $entities,
-                'valorBrutoTotal'    => $valorBrutoTotal,
-                'valorLiquidoTotal'  => $valorLiquidoTotal,
-                'valorAplicadoMes'   => $valorAplicadoMes,
-                'valorRendimentoMes' => $valorRendimentoMes
+        if (!$form->isValid()) {
+            return $this->render('RoyopaSicinBundle:Form:form_consulta_posicao_sintetica.html.twig', array(
+                'title'       => 'Consulta posição sintética de investimentos',
+                'subtitle' => 'Utilize o formulário abaixo para consultar a posição sintética de investimentos.',
+                'form'     => $form->createView(),
             ));
-
         }
 
-        return $this->render('RoyopaSicinBundle:Form:form_consulta_data.html.twig', array(
-            'title'    => 'Consulta posição sintética de investimentos',
-            'subtitle' => 'Utilize o formulário abaixo para consultar a posição sintética de investimentos.',
-            'form'     => $form->createView(),
-        ));
+        $data = $form->getData();
+        $ano  = $data['ano'];
+        $mes = $data['mes'];
+
+        $em = $this->getDoctrine()->getManager();
+        $entities =
+            $em
+                ->getRepository('RoyopaSicinBundle:Posicao')
+                ->findPosicaoSintetica($mes, $ano);
+
+        //return new Response(var_dump($entities));
+
+        return array(
+            'ano'       => $ano,
+            'mes'      => $mes,
+            'entities' => $entities
+            );
     }
 
     /**
@@ -387,9 +368,9 @@ class PosicaoController extends Controller
 
         while ($row = $statement->fetch()) {
             $data = array(
-                'vr_bruto_total' => number_format($row['vr_bruto_total'],2,",",""),
-                'quantidade' => number_format($row['quantidade'],0,",","")
-                );
+            'vr_bruto_total' => number_format($row['vr_bruto_total'], 2, ",", ""),
+            'quantidade' => number_format($row['quantidade'], 0, ",", "")
+            );
         }
 
         // create a JSON-response with a 200 status code
@@ -400,5 +381,5 @@ class PosicaoController extends Controller
         }
 
         return $response;
-    }    
+    }
 }

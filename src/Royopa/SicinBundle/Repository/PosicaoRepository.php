@@ -46,9 +46,9 @@ class PosicaoRepository extends EntityRepository
 
         try {
             return $query
-                    ->getQuery()
-                    ->getSingleResult();
-            } catch (\Doctrine\ORM\NoResultException $e) {
+                        ->getQuery()
+                        ->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
             return new Posicao();
         }
     }
@@ -58,33 +58,33 @@ class PosicaoRepository extends EntityRepository
      *
      * @return array[]
      */
-    public function findPosicaoSintetica(\DateTime $dataReferencia)
+    public function findPosicaoSintetica($mes, $ano)
     {
-        $query = $this->createQueryBuilder('p');
-        //instituicao financeira
+        $mes;
+        $ano;
+
+        $query = $this->createQueryBuilder('s')
+            ->leftJoin('s.ativo', 'a')
+            ->leftJoin('a.tipo', 't');
+
+        $query->select(
+            's.dataReferencia,
+            t.nome,
+            MAX(s.valorProvento) AS valorProvento,
+            MAX(s.valorMercado) AS valorMercado,
+            MAX(s.valorBrutoTotal) AS valorBrutoTotal,
+            MAX(s.valorLiquidoTotal) AS valorLiquidoTotal'
+        );
+
+        $string = "$ano-$mes-";
         $query
-            ->andWhere('p.instituicaoFinanceira = :instituicaoFinanceira')
-            ->setParameter('instituicaoFinanceira', $posicao->getInstituicaoFinanceira());
-        //ativo
-        $query
-            ->andWhere('p.ativo = :ativo')
-            ->setParameter('ativo', $posicao->getAtivo());
+            ->andWhere('s.dataReferencia LIKE :data')
+            ->setParameter('data', $string.'%');
 
-        //data referência
-        $query
-            ->andWhere('p.dataReferencia = :dataReferencia')
-            ->setParameter('dataReferencia', $date->format('Y-m-d'));
+        //$query->andWhere('s.dataReferencia = :mes')->setParameter('mes', $mes);
+        $query->groupBy('t.nome');
+        $query->orderBy('valorLiquidoTotal', 'DESC');
 
-        $query->orderBy('p.dataReferencia', 'DESC');
-
-        $query->setMaxResults(1);
-
-        try {
-            return $query
-                    ->getQuery()
-                    ->getSingleResult();
-            } catch (\Doctrine\ORM\NoResultException $e) {
-            return new Posicao();
-        }
-    }    
+        return $query->getQuery()->getResult();
+    }
 }

@@ -9,6 +9,7 @@
               Posição Sintética {{ mes }}/{{ ano }}
             </h1>
             <p class="text-right">
+                <a class="btn btn-default" href="{{ path('posicao_new') }}">Posição Analítica</a>
                 <a class="btn btn-default btn-success" href="{{ path('posicao_new') }}">Nova posição</a>
             </p>
         </div>
@@ -22,6 +23,7 @@
                 <th>Valor Bruto</th>
                 <th>Valor Líquido</th>
                 <th>Valor Mercado</th>
+                <th>% Rendimento</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +35,11 @@
                 <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorMercado|number_format(2, ',', '.') }}</td>
+                {% if entity.valorProvento == 0 %}
+                <td>{{ (((entity.valorLiquidoTotal/entity.valorBrutoTotal)*100)-100)|number_format(4, ',', '.') }}</td>
+                {% else %}
+                <td>{{ ((entity.valorProvento/entity.valorLiquidoTotal)*100)|number_format(4, ',', '.') }}</td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

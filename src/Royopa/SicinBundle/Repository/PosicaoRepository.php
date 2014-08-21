@@ -70,10 +70,11 @@ class PosicaoRepository extends EntityRepository
         $query->select(
             's.dataReferencia,
             t.nome,
-            MAX(s.valorProvento) AS valorProvento,
-            MAX(s.valorMercado) AS valorMercado,
-            MAX(s.valorBrutoTotal) AS valorBrutoTotal,
-            MAX(s.valorLiquidoTotal) AS valorLiquidoTotal'
+            t.id,
+            SUM(s.valorProvento) AS valorProvento,
+            SUM(s.valorMercado) AS valorMercado,
+            SUM(s.valorBrutoTotal) AS valorBrutoTotal,
+            SUM(s.valorLiquidoTotal) AS valorLiquidoTotal'
         );
 
         $string = "$ano-$mes-";
@@ -81,7 +82,9 @@ class PosicaoRepository extends EntityRepository
             ->andWhere('s.dataReferencia LIKE :data')
             ->setParameter('data', $string.'%');
 
-        //$query->andWhere('s.dataReferencia = :mes')->setParameter('mes', $mes);
+        $qy=$query->getQuery();
+        $sql=$qy->getSQL();
+
         $query->groupBy('t.nome');
         $query->orderBy('valorLiquidoTotal', 'DESC');
 

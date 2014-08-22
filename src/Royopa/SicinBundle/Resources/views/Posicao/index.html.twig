@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="page-header">
             <h1>
-              Posição 
+              Posição
               {% if dataReferencia is defined %}
                 {{ dataReferencia|date('d/m/Y') }}
               {% endif %}
@@ -18,15 +18,16 @@
 
     <table class="datatable table table-condensed table-striped">
         <thead>
-            <tr>
+            <tr class="small">
                 <th>Id</th>
                 <th>Data</th>
                 <th>Ativo</th>
-                <th>Vr Apl Tot</th>
-                <th>Vr Liq Tot</th>
-                <th>Vr Apl Mês</th>
-                <th>Vr Rend Mês</th>
-                <th>Perc Rend Mês</th>
+                <th>Custo</th>
+                <th>Valor Atual</th>
+                <th>Valor Aplicado Mês</th>
+                <th>Provento Mês</th>
+                <th>Rendimento Mês</th>
+                <th>% Rendimento Mês</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
                 <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorAplicadoMes|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valorProvento|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorRendimentoMes|number_format(2, ',', '.') }}</td>
                 <td>{{ ((entity.valorRendimentoMes/(entity.valorBrutoTotal))*100)|number_format(2, ',', '.') }} %</td>
             </tr>
@@ -51,6 +53,7 @@
               <th>{{ valorBrutoTotal|number_format(2, ',', '.') }}</th>
               <th>{{ valorLiquidoTotal|number_format(2, ',', '.') }}</th>
               <th>{{ valorAplicadoMes|number_format(2, ',', '.') }}</th>
+              <th></th>
               <th>{{ valorRendimentoMes|number_format(2, ',', '.') }}</th>
               <th></th>
           </tr>

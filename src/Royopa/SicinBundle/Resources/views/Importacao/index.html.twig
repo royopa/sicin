@@ -1,0 +1,24 @@
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1>{{ title }}</h1>
+      {% if subtitle %}
+        <p>{{ subtitle }}</p>
+      {% endif %}
+    </div>
+    <div class="col-xs-3">
+    {{ form_start(form) }}
+      {{ form_errors(form) }}
+      <div class="form-group">
+        {{ form_row(form.attachment) }}
+        <p>
+          {{ form_row(form.submit) }}
+        </p>
+      </div>
+    {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

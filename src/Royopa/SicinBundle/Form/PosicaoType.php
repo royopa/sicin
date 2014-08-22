@@ -51,7 +51,7 @@ class PosicaoType extends AbstractType
                 )
             )
             ->add('valorBrutoTotal', null, array(
-                'label' => 'Valor Bruto Total',
+                'label' => 'Custo Total',
                 'required' => true,
                 'attr' => array(
                     'class' => 'form-control'

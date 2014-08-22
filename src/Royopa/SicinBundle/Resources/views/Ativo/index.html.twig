@@ -1,7 +1,14 @@
 {% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
 
 {% block body -%}
-    <h1>Ativos</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>Ativos</h1>
+            <p class="text-right">
+                <a class="btn btn-default btn-success" href="{{ path('ativo_new') }}">Novo ativo</a>
+            </p>
+        </div>
 
     <table class="datatable">
         <thead>
@@ -23,9 +30,6 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('ativo_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
                         <a href="{{ path('ativo_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
@@ -34,12 +38,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('ativo_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+</div>
+{% endblock %}

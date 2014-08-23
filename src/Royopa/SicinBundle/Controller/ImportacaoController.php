@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\ImportacaoType;
+use Ddeboer\DataImport\Reader\CsvReader;
 
 /**
  * Importação controller.
@@ -46,17 +47,69 @@ class ImportacaoController extends Controller
 
         $uploadedFile = $form['attachment']->getData();
 
-        $uploadedFile->move(
+        $endereco = $this->getUploadRootDir().'/extrato.' . $uploadedFile->guessExtension();
+
+        $file = $uploadedFile->move(
             $this->getUploadRootDir(),
             'extrato.' . $uploadedFile->guessExtension()
         );
 
         //verifica o mime/type do arquivo
-        if ($uploadedFile->getMimeType() != 'text/csv') {
+        if ($file->getMimeType() != 'text/plain') {
             throw $this->createNotFoundException('Arquivo inválido. Utilize arquivos csv.');
         }
 
-        return new Response(var_dump($uploadedFile));
+        //abre o arquivo texto e trabalha com ele
+        $file = new \SplFileObject($endereco);
+        $reader = new CsvReader($file);
+
+        //data,if,titulo,ant,c,d,bloq,atual,origem,bruto_atual,ir,iof,bvmf,ag_cust,liquido,no_periodo,analitico
+        $reader->setHeaderRowNumber(0);
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($reader as $row) {
+
+            var_dump($row) . '</BR>';
+
+            //localiza a if título
+            $if = $em->getRepository('RoyopaSicinBundle:InstituicaoFinanceira')->findOneByNome($row['if']);
+
+            if (!$if) {
+                throw $this->createNotFoundException('Unable to find if entity.');
+            }
+
+            //título/ativo
+            $ativo = $em->getRepository('RoyopaSicinBundle:Ativo')->findOneByCodigo($row['titulo']);
+
+            if (!$ativo) {
+                throw $this->createNotFoundException('Unable to find ativo entity.');
+            }
+
+            //se não existir nenhuma posição já cadastrada com os mesmos dados, cadastra nova posição
+            $posicao = new Posicao();
+            //data
+            $posicao->setDataReferencia(new \DateTime($row['data']));
+            //if
+            $posicao->setInstituicaoFinanceira($if);
+            //ativo
+            $posicao->setAtivo($ativo);
+            //quantidade
+            $row['atual'] = str_replace(',', '.', $row['atual']);
+            $posicao->setQuantidade($row['atual']);
+            //valor custo
+            $row['origem'] = str_replace(',', '.', $row['origem']);
+            $posicao->setValorBrutoTotal($row['origem']);
+            //liquido
+            $row['liquido'] = str_replace(',', '.', $row['liquido']);
+            $posicao->setValorLiquidoTotal($row['liquido']);
+
+            //persiste no banco de dados
+            $em->persist($posicao);
+            $em->flush();
+        }
+
+        return new Response(var_dump($reader));
     }
 
     protected function getUploadRootDir()

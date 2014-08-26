@@ -60,7 +60,7 @@ class PosicaoController extends Controller
         //return new Response(var_dump($entities));
 
         return array(
-            'ano'       => $ano,
+            'ano'      => $ano,
             'mes'      => $mes,
             'entities' => $entities
             );
@@ -75,6 +75,12 @@ class PosicaoController extends Controller
      */
     public function indexAction()
     {
+        $dataReferencia = new \DateTime('2014-12-30');
+        $dataReferencia = new \DateTime('2014-11-28');
+        $dataReferencia = new \DateTime('2014-10-31');
+        $dataReferencia = new \DateTime('2014-09-30');
+        $dataReferencia = new \DateTime('2014-08-29');
+        $dataReferencia = new \DateTime('2014-07-31');
         $dataReferencia = new \DateTime('2014-06-30');
 
         $em = $this->getDoctrine()->getManager();
@@ -84,12 +90,11 @@ class PosicaoController extends Controller
                 ->getRepository('RoyopaSicinBundle:Posicao')
                 ->findByDataReferencia($dataReferencia);
 
-        $entities = $em->getRepository('RoyopaSicinBundle:Posicao')->findAll();
-
         $valorBrutoTotal    = 0;
         $valorLiquidoTotal  = 0;
         $valorAplicadoMes   = 0;
         $valorRendimentoMes = 0;
+        $valorProventoMes   = 0;
 
         foreach ($entities as $posicao) {
             $posicaoAnterior = $em->getRepository('RoyopaSicinBundle:Posicao')->getPosicaoAnterior($posicao);
@@ -99,6 +104,7 @@ class PosicaoController extends Controller
             $valorLiquidoTotal  = $valorLiquidoTotal + $posicao->getValorLiquidoTotal();
             $valorAplicadoMes   = $valorAplicadoMes + $posicao->getValorAplicadoMes();
             $valorRendimentoMes = $valorRendimentoMes + $posicao->getValorRendimentoMes();
+            $valorProventoMes   = $valorProventoMes + $posicao->getValorProvento();
         }
 
         return array(
@@ -107,7 +113,8 @@ class PosicaoController extends Controller
             'valorBrutoTotal'    => $valorBrutoTotal,
             'valorLiquidoTotal'  => $valorLiquidoTotal,
             'valorAplicadoMes'   => $valorAplicadoMes,
-            'valorRendimentoMes' => $valorRendimentoMes
+            'valorRendimentoMes' => $valorRendimentoMes,
+            'valorProventoMes'   => $valorProventoMes
         );
     }
     /**
@@ -226,7 +233,7 @@ class PosicaoController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'        => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -283,7 +290,7 @@ class PosicaoController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'        => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }

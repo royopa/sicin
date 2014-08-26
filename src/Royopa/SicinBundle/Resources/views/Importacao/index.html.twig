@@ -8,17 +8,31 @@
         <p>{{ subtitle }}</p>
       {% endif %}
     </div>
-    <div class="col-xs-3">
+  </div>
+</div>    
+<div class="row">
+  <div class="col-xs-3">
     {{ form_start(form) }}
-      {{ form_errors(form) }}
-      <div class="form-group">
-        {{ form_row(form.attachment) }}
-        <p>
-          {{ form_row(form.submit) }}
-        </p>
-      </div>
-    {{ form_end(form) }}
+    {{ form_errors(form) }}
+    <div class="form-group">
+      {{ form_row(form.attachment) }}
+      <p>
+        {{ form_row(form.submit) }}
+      </p>
     </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Exemplo de arquivo csv para importação</h2>
+    <p>data,if,titulo,ant,c,d,bloq,atual,origem,bruto_atual,ir,iof,bvmf,ag_cust,liquido,no_periodo,analitico</p>
+    <p>2014/06/30,"CAIXA ECONOMICA FEDERAL","LTN 010117",2,0,0,0,2,"1401,58","1519,44","26,51",0,"1,8",0,"1491,13",Não,-</p>
+    <p>2014/06/30,"CGD INVESTIMENTOS CVC S/A","LTN 010118","8,1",1,0,0,"9,1","5817,78","6161,41","77,29","1,63","4,56",0,"6077,93",Não,-</p>
+    <p>2014/06/30,"SPINELLI S.A. CVMC","LTN 010118","6,6",0,0,0,"6,6","4179,94","4468,72","64,95",0,"3,91",0,"4399,86",Não,-</p>
+    <p>2014/06/30,"SPINELLI S.A. CVMC","NTNB 150820",6,0,0,0,6,"14121,13","15217,56","246,67",0,"14,02",0,"14956,87",Não,-</p>
+    <p>2014/06/30,"SPINELLI S.A. CVMC","NTNB Principal 150535","0,1",0,0,0,"0,1","60,32","70,28","2,24",0,"0,06",0,"67,98",Não,-</p>
   </div>
 </div>
 {% endblock %}

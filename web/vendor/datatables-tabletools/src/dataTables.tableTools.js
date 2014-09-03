@@ -1,4 +1,4 @@
-/*! TableTools 2.2.1
+/*! TableTools 2.2.2
  * 2009-2014 SpryMedia Ltd - datatables.net/license
  *
  * ZeroClipboard 1.0.4
@@ -8,7 +8,7 @@
 /**
  * @summary     TableTools
  * @description Tools and buttons for DataTables
- * @version     2.2.1
+ * @version     2.2.2
  * @file        dataTables.tableTools.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -77,7 +77,11 @@ return TableTools;
 
 // Define as an AMD module if possible
 if ( typeof define === 'function' && define.amd ) {
-	define( 'datatables-tabletools', ['jquery', 'datatables'], factory );
+	define( ['jquery', 'datatables'], factory );
+}
+else if ( typeof exports === 'object' ) {
+    // Node/CommonJS
+    factory( require('jquery'), require('datatables') );
 }
 else if ( jQuery && !jQuery.fn.dataTable.TableTools ) {
 	// Otherwise simply initialise as normal, stopping multiple evaluation

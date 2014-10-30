@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
-        "ddeboer/data-import-bundle": "~0.1"
+        "ddeboer/data-import-bundle": "~0.1",
+        "simplethings/entity-audit-bundle": "~0.6"
     },
     "scripts": {
         "post-install-cmd": [

@@ -80,8 +80,9 @@ class PosicaoController extends Controller
         $dataReferencia = new \DateTime('2014-10-31');
         $dataReferencia = new \DateTime('2014-09-30');
         $dataReferencia = new \DateTime('2014-08-29');
-        $dataReferencia = new \DateTime('2014-07-31');
-        $dataReferencia = new \DateTime('2014-06-30');
+        //$dataReferencia = new \DateTime('2014-07-31');
+        ////$dataReferencia = new \DateTime('2014-06-30');
+        //$dataReferencia = new \DateTime('2014-05-30');
 
         $em = $this->getDoctrine()->getManager();
 

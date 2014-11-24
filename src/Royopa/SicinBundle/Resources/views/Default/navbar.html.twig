@@ -1,46 +1,43 @@
-<div class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('home') }}">SICIN</a>
-          </div>
+  <div class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('home') }}">SICIN</a>
+      </div>
 
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="{{ path('home') }}" class="glyphicon glyphicon-home active"></a></li>
-              <li><a href="{{ path('instituicao_financeira') }}">Instituição Financeira</a></li>
-              <li><a href="{{ path('ativo_categoria') }}">Categoria Ativo</a></li>
-              <li><a href="{{ path('taxa_tipo') }}">Tipo Taxa</a></li>
-              <li><a href="{{ path('ativo_tipo') }}">Tipo Ativo</a></li>
-              <li><a href="{{ path('ativo') }}">Ativo</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posição<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{ path('posicao_new') }}">Nova Posição</a></li>
-                  <li><a href="{{ path('posicao') }}">Posição</a></li>
-                  <li><a href="{{ path('posicao_sintetica') }}">Posição Sintética</a></li>
-                  <li><a href="{{ path('importacao_new') }}">Importar Extrato</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="{{ path('home') }}" class="glyphicon glyphicon-home active"></a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posição<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ path('posicao_new') }}">Nova Posição</a></li>
+              <li><a href="{{ path('posicao') }}">Posição</a></li>
+              <li><a href="{{ path('posicao_sintetica') }}">Posição Sintética</a></li>
+              <li><a href="{{ path('importacao_new') }}">Importar Extrato</a></li>
             </ul>
-          </div><!--/.nav-collapse -->
+          </li>
+          <li><a href="{{ path('cotacao') }}">Cotação</a></li>
+          <li><a href="{{ path('parametros') }}">Parâmetros</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li>
+              <a href="{{ path('fos_user_security_logout') }}"
+              class="glyphicon glyphicon-off" title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}">
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+
+      
+    </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->
 </div>
 

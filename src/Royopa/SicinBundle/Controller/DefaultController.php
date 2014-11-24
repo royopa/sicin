@@ -28,4 +28,18 @@ class DefaultController extends Controller
 
         );
     }
+
+    /**
+     * Default Page.
+     *
+     * @Route("/parametros", name="parametros")
+     * @Method("GET")
+     * @Template("RoyopaSicinBundle:Default:parametros.html.twig")
+     */
+    public function parametrosAction()
+    {
+        return array(
+
+        );
+    }
 }

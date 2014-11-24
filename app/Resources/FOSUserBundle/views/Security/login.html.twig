@@ -1,0 +1,46 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<div class="container">
+    <form action="{{ path("fos_user_security_check") }}" method="post" id="login" class="form-signin" role="form">
+
+                <h2 class="form-signin-heading">Login</h2>
+                <p class="text-left">Utilize a sua matrícula e senha da rede Caixa para acessar a página</p>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <input type="text" id="username" name="_username" required="required" class="
+                form-control" placeholder = "Matrícula" autofocus = ""
+                {% if app.request.server.get('REMOTE_USER') != null %}
+                    readonly=""
+                {% endif %}
+                />
+
+                <input type="password" id="password" name="_password" required="required" class="
+                form-control" placeholder = "Senha"/>
+
+                </br>
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" checked="checked" />
+                <label for="remember_me">Mantenha-me Conectado</label>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+                {% if error %}
+                    <p>
+
+                        <div class="alert alert-danger">
+                            {{ error|trans }}
+                        </div>
+                    </p>
+                {% endif %}
+
+                </br>
+
+                <a href="{{ path('fos_user_registration_register') }}" title="Clique aqui para se cadastrar" class="btn btn-lg btn-success btn-block">Criar uma conta</a>
+    </form>
+</div> <!-- /container -->
+
+{% endblock fos_user_content %}

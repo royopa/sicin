@@ -1,0 +1,30 @@
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
+
+{% block body -%}
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1>Cotação: {{ ativo.symbol }} - {{ ativo.name }}</h1>
+    </div>
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Abertura</th>
+          <th>Fechamento</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, entity in entities.quote %}
+          <tr>
+            <td>{{ entity.Date|date("d/m/Y") }}</td>
+            <td>{{ entity.Open }}</td>
+            <td>{{ entity.Close }}</td>
+            <td>{{ entity.Volume }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}

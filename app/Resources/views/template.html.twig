@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br" >
+    <head>
+        {% block head %}
+        {% embed 'RoyopaSicinBundle:Default:head.html.twig' %}
+        {% endembed %}
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {% embed 'RoyopaSicinBundle:Default:navbar.html.twig' %}
+        {% endembed %}
+        {% endblock %}
+
+        <div class="container">
+
+        {% block content %}
+            {% block body %}
+                {% embed 'RoyopaSicinBundle:Default:index.html.twig' %}
+                {% endembed %}
+            {% endblock %}
+        {% endblock %}
+
+        {% block flashMessages %}
+          {% embed 'RoyopaSicinBundle:Default:flashMessages.html.twig' %}
+          {% endembed %}
+        {% endblock %}
+
+        {% block footer %}
+          {% embed 'RoyopaSicinBundle:Default:footer.html.twig' %}
+          {% endembed %}
+        {% endblock %}
+
+        </div><!-- /container -->
+    </body>
+</html>

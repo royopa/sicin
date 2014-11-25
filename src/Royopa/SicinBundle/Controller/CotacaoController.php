@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
+use Ghunti\HighchartsPhpBundle\HighchartsPHP\Highchart;
+use Ghunti\HighchartsPhpBundle\HighchartsPHP\HighchartJsExpr;
 
 /**
  * Cotação controller.
@@ -63,6 +65,18 @@ class CotacaoController extends Controller
         $interval->invert = 1;
         $dataInicial = $dataInicial->add($interval);
 
+        $chart = new Highchart(Highchart::HIGHSTOCK);
+        $chart->chart->renderTo = "container";
+        $chart->rangeSelector->selected = 1;
+        $chart->title->text = "AAPL Stock Price";
+        $chart->series[] = array(
+            'name' => "AAPL",
+            'data' => new HighchartJsExpr("data"),
+            'tooltip' => array(
+                'valueDecimals' => 2
+            )
+        );
+
         //Get historical data
         $data = $client->getHistoricalData(
             $ativo['symbol'],
@@ -73,6 +87,7 @@ class CotacaoController extends Controller
         return array(
             'ativo'    => $ativo,
             'entities' => $data['query']['results'],
+            'chart'    => $chart,
         );
     }
 }

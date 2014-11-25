@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Royopa\SicinBundle\RoyopaSicinBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
+            new Ghunti\HighchartsPhpBundle\GhuntiHighchartsPhpBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

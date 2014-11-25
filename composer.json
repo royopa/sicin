@@ -22,7 +22,8 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "ddeboer/data-import-bundle": "~0.1",
         "simplethings/entity-audit-bundle": "~0.6",
-        "scheb/yahoo-finance-api": "dev-master"
+        "scheb/yahoo-finance-api": "dev-master",
+        "royopa/highchartsphp-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

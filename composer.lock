@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a0d8dd4899dd1ff645561af8010156f",
+    "hash": "db3752ad2b876d217290eec0c60bf0e1",
     "packages": [
         {
             "name": "ddeboer/data-import",
@@ -1080,6 +1080,59 @@
             "time": "2012-12-21 11:40:51"
         },
         {
+            "name": "royopa/highchartsphp-bundle",
+            "version": "dev-master",
+            "target-dir": "Ghunti/HighchartsPhpBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/royopa/HighchartsPhpBundle.git",
+                "reference": "fac3d71fd2fdcb60f4fad3213de137a200c4a65a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/royopa/HighchartsPhpBundle/zipball/fac3d71fd2fdcb60f4fad3213de137a200c4a65a",
+                "reference": "fac3d71fd2fdcb60f4fad3213de137a200c4a65a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ghunti\\HighchartsPhpBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Gonçalo Queirós",
+                    "email": "mail@goncaloqueiros.net",
+                    "homepage": "http://goncaloqueiros.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Rodrigo Prado de Jesus",
+                    "email": "royopa@gmail.com",
+                    "homepage": "http://about.me/royopa",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony HighchartsPHPBundle",
+            "homepage": "http://github.com/royopa/HighchartsPhpBundle",
+            "keywords": [
+                "charts",
+                "highcharts",
+                "highstock",
+                "javascript",
+                "php"
+            ],
+            "time": "2014-11-25 10:16:42"
+        },
+        {
             "name": "scheb/yahoo-finance-api",
             "version": "dev-master",
             "source": {
@@ -1273,16 +1326,16 @@
         },
         {
             "name": "simplethings/entity-audit-bundle",
-            "version": "v0.6",
+            "version": "v0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplethings/EntityAudit.git",
-                "reference": "c8f3fc50a7384c0c44798de4675f870890097e26"
+                "reference": "37f8aeaea4cb7e4b7fba07db4109843080a22d0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplethings/EntityAudit/zipball/c8f3fc50a7384c0c44798de4675f870890097e26",
-                "reference": "c8f3fc50a7384c0c44798de4675f870890097e26",
+                "url": "https://api.github.com/repos/simplethings/EntityAudit/zipball/37f8aeaea4cb7e4b7fba07db4109843080a22d0a",
+                "reference": "37f8aeaea4cb7e4b7fba07db4109843080a22d0a",
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1365,7 @@
                 "database",
                 "persistence"
             ],
-            "time": "2014-05-09 09:58:26"
+            "time": "2014-11-10 16:07:56"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1548,16 +1601,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.6",
+            "version": "v2.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210"
+                "reference": "dd4254fc39a702af22cd886a6790769541469da1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
-                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/dd4254fc39a702af22cd886a6790769541469da1",
+                "reference": "dd4254fc39a702af22cd886a6790769541469da1",
                 "shasum": ""
             },
             "require": {
@@ -1618,7 +1671,7 @@
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.3",
                 "ocramius/proxy-manager": ">=0.3.1,<0.6-dev",
-                "propel/propel1": "1.6.*"
+                "propel/propel1": "~1.6"
             },
             "type": "library",
             "extra": {
@@ -1657,7 +1710,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-24 06:55:39"
+            "time": "2014-11-20 16:00:03"
         },
         {
             "name": "twig/extensions",
@@ -1774,7 +1827,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "scheb/yahoo-finance-api": 20
+        "scheb/yahoo-finance-api": 20,
+        "royopa/highchartsphp-bundle": 20
     },
     "prefer-stable": false,
     "platform": {

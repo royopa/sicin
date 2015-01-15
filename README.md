@@ -15,9 +15,9 @@ http://sicin.esy.es/
 To see a real-live page in action, start the PHP built-in web server with
 command:
 
-    $ composer run
+    $ php app/console server:start
 
-Then, browse to http://localhost:8888/.
+Then, browse to [http://localhost:8000/](http://localhost:8000/).
 
 parameters.yaml sample
 ----------------------

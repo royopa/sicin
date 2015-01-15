@@ -3,30 +3,24 @@ SICIN - Controle de Investimentos
 
 http://sicin.esy.es/
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
-
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
-
 1) Using the application
-----------------------------------
+------------------------
 
-git clone https://github.com/royopa/sicin.git
+    $ git clone https://github.com/royopa/sicin.git
+    $ cd sicin
+    $ composer update
+    $ bower update
+    $ composer run
 
-cd sicin
+To see a real-live page in action, start the PHP built-in web server with
+command:
 
-composer update
+    $ composer run
 
-bower update
+Then, browse to http://localhost:8888/.
 
-vagrant up
-
-http://192.168.33.100/web/app_dev.php
-
-parameters.yaml
-------
+parameters.yaml sample
+----------------------
 
 ```
 # This file is auto-generated during the composer install

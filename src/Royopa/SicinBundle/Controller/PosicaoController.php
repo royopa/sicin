@@ -75,14 +75,7 @@ class PosicaoController extends Controller
      */
     public function indexAction()
     {
-        $dataReferencia = new \DateTime('2014-12-30');
-        $dataReferencia = new \DateTime('2014-11-28');
-        $dataReferencia = new \DateTime('2014-10-31');
-        $dataReferencia = new \DateTime('2014-09-30');
-        $dataReferencia = new \DateTime('2014-08-29');
-        //$dataReferencia = new \DateTime('2014-07-31');
-        ////$dataReferencia = new \DateTime('2014-06-30');
-        //$dataReferencia = new \DateTime('2014-05-30');
+        $dataReferencia = new \DateTime('2014-12-31');
 
         $em = $this->getDoctrine()->getManager();
 

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "64880f43aeb0fd4321125ab68dedf528",
+    "hash": "b5c737ef6ee26a5fbf1a80115c22b372",
     "packages": [
         {
             "name": "ddeboer/data-import",
@@ -1147,6 +1147,63 @@
             "time": "2014-12-29 21:29:35"
         },
         {
+            "name": "phpoffice/phpexcel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "c40bb233bfa59fe8aadc6f3714cf500ec2c38e0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/c40bb233bfa59fe8aadc6f3714cf500ec2c38e0f",
+                "reference": "c40bb233bfa59fe8aadc6f3714cf500ec2c38e0f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2014-12-18 21:56:47"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1935,6 +1992,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
+        "phpoffice/phpexcel": 20,
         "scheb/yahoo-finance-api": 20,
         "royopa/highchartsphp-bundle": 20
     },

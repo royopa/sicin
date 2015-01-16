@@ -21,6 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "ddeboer/data-import-bundle": "~0.1",
+        "phpoffice/phpexcel": "dev-master",
         "simplethings/entity-audit-bundle": "~0.6",
         "scheb/yahoo-finance-api": "dev-master",
         "royopa/highchartsphp-bundle": "dev-master"

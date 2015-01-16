@@ -19,19 +19,19 @@ use Ddeboer\DataImport\Reader\CsvReader;
  * @Route("/importacao")
  * @Security("has_role('ROLE_ADMIN')")
  */
-class ImportacaoController extends Controller
+class ImportacaoTesouroDiretoController extends Controller
 {
     /**
      * Lists all AtivoTipo entities.
      *
-     * @Route("/", name="importacao_new")
+     * @Route("/", name="importacao_tesouro_direto_new")
      * @Method({"POST","GET"})
      * @Template()
      */
     public function indexAction(Request $request)
     {
         $form = $this->createForm(new ImportacaoType(), null, array(
-            'action' => $this->generateUrl('importacao_new'),
+            'action' => $this->generateUrl('importacao_tesouro_direto_new'),
             'method' => 'POST',
         ));
 
@@ -70,7 +70,9 @@ class ImportacaoController extends Controller
 
         foreach ($reader as $row) {
 
-            var_dump($row) . '</BR>';
+            if (!$row) {
+                continue;
+            }
 
             //localiza a if título
             $if = $em->getRepository('RoyopaSicinBundle:InstituicaoFinanceira')->findOneByNome($row['if']);
@@ -83,7 +85,8 @@ class ImportacaoController extends Controller
             $ativo = $em->getRepository('RoyopaSicinBundle:Ativo')->findOneByCodigo($row['titulo']);
 
             if (!$ativo) {
-                throw $this->createNotFoundException('Unable to find ativo entity.');
+                
+                throw $this->createNotFoundException('Ativo ' . $row['titulo'] . ' não cadastrado.');
             }
 
             //se não existir nenhuma posição já cadastrada com os mesmos dados, cadastra nova posição

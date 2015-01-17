@@ -11,20 +11,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\ImportacaoType;
+use Royopa\SicinBundle\Entity\InstituicaoFinanceira;
+use Royopa\SicinBundle\Entity\Ativo;
 use Ddeboer\DataImport\Reader\CsvReader;
 
 /**
- * Importação controller.
+ * ImportacaoBmfBovespa controller.
  *
- * @Route("/importacao_tesouro_direto")
+ * @Route("/importacao_bmfbovespa")
  * @Security("has_role('ROLE_ADMIN')")
  */
-class ImportacaoTesouroDiretoController extends Controller
+class ImportacaoBmfBovespaController extends Controller
 {
     /**
-     * Lists all AtivoTipo entities.
+     * Importa o extrato da bmf bovespa com a posição
      *
-     * @Route("/", name="importacao_tesouro_direto_new")
+     * @Route("/", name="importacao_bmfbovespa_new")
      * @Method({"POST","GET"})
      * @Template()
      */
@@ -34,7 +36,7 @@ class ImportacaoTesouroDiretoController extends Controller
             new ImportacaoType(),
             null,
             array(
-                'action' => $this->generateUrl('importacao_tesouro_direto_new'),
+                'action' => $this->generateUrl('importacao_bmfbovespa_new'),
                 'method' => 'POST',
             )
         );
@@ -43,9 +45,9 @@ class ImportacaoTesouroDiretoController extends Controller
 
         if (!$form->isValid()) {
             return $this->render(
-                'RoyopaSicinBundle:Importacao:index.html.twig',
+                'RoyopaSicinBundle:Importacao:importacao_bmfbovespa.html.twig',
                 array(
-                    'title'    => 'Importação de extrato mensal',
+                    'title'    => 'Importação de extrato mensal BM&F Bovespa',
                     'subtitle' => 'Utilize o formulário abaixo para importar um arquivo de extrato.',
                     'form'     => $form->createView(),
                 )
@@ -81,45 +83,82 @@ class ImportacaoTesouroDiretoController extends Controller
                 continue;
             }
 
-            //localiza a if título
-            $if = $em->getRepository('RoyopaSicinBundle:InstituicaoFinanceira')->findOneByNome($row['if']);
+            //procura a if
+            $if = $this->getIf($row['if'], $em);
+            
+            $ativo = $this->getAtivo($row['titulo'], $em);
 
-            if (!$if) {
-                throw $this->createNotFoundException('Unable to find if entity.');
-            }
-
-            //título/ativo
-            $ativo = $em->getRepository('RoyopaSicinBundle:Ativo')->findOneByCodigo($row['titulo']);
-
-            if (!$ativo) {
-                
-                throw $this->createNotFoundException('Ativo ' . $row['titulo'] . ' não cadastrado.');
-            }
-
-            //se não existir nenhuma posição já cadastrada com os mesmos dados, cadastra nova posição
-            $posicao = new Posicao();
-            //data
-            $posicao->setDataReferencia(new \DateTime($row['data']));
-            //if
-            $posicao->setInstituicaoFinanceira($if);
-            //ativo
-            $posicao->setAtivo($ativo);
-            //quantidade
-            $row['atual'] = str_replace(',', '.', $row['atual']);
-            $posicao->setQuantidade($row['atual']);
-            //valor custo
-            $row['origem'] = str_replace(',', '.', $row['origem']);
-            $posicao->setValorBrutoTotal($row['origem']);
-            //liquido
-            $row['liquido'] = str_replace(',', '.', $row['liquido']);
-            $posicao->setValorLiquidoTotal($row['liquido']);
+            //popula a posição
+            $posicao = $this->populatePosicao($row, new Posicao(), $if, $ativo);
 
             //persiste no banco de dados
             $em->persist($posicao);
             $em->flush();
+
+            var_dump($row);
+            echo '<p>Salvo</p>';
         }
 
-        return new Response(var_dump($reader));
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Posições importadas com sucesso!'
+        );
+
+        return $this->redirect(
+            $this->generateUrl(
+                'posicao'
+            )
+        );
+    }
+
+    protected function getIf($if, $em)
+    {
+        //localiza a if título
+        $if = $em->getRepository('RoyopaSicinBundle:InstituicaoFinanceira')
+            ->findOneByNome($if);
+
+        if (!$if) {
+            throw $this->createNotFoundException('Unable to find if entity.');
+        }
+
+        return $if;
+    }
+
+    protected function getAtivo($ativo, $em)
+    {
+        //título/ativo
+        $ativo = $em->getRepository('RoyopaSicinBundle:Ativo')
+            ->findOneByCodigo($ativo);
+
+        if (!$ativo) {
+            throw $this->createNotFoundException('Ativo ' . $ativo . ' não cadastrado.');
+        }
+
+        return $ativo;
+    }
+
+    protected function populatePosicao(
+        $row,
+        Posicao $posicao,
+        InstituicaoFinanceira $if,
+        Ativo $ativo
+    ) {
+        //data
+        $posicao->setDataReferencia(new \DateTime($row['data']));
+        //if
+        $posicao->setInstituicaoFinanceira($if);
+        //ativo
+        $posicao->setAtivo($ativo);
+        //quantidade
+        $posicao->setQuantidade((int) $row['quantidade']);
+        //valor_mercado
+        $posicao->setValorMercado((float) $row['valor_mercado']);
+        $posicao->setValorBrutoTotal((float) $row['valor_mercado']);
+        $posicao->setValorLiquidoTotal((float) $row['valor_mercado']);
+        //valor_provento
+        $posicao->setValorProvento($row['valor_provento']);
+
+        return $posicao;
     }
 
     protected function getUploadRootDir()

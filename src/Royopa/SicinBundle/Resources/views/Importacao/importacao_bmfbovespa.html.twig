@@ -1,0 +1,42 @@
+{% extends 'RoyopaSicinBundle:Default:base.html.twig' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1>{{ title }}</h1>
+      {% if subtitle %}
+        <p>{{ subtitle }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>    
+<div class="row">
+  <div class="col-xs-3">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="form-group">
+      {{ form_row(form.attachment) }}
+      <p>
+        {{ form_row(form.submit) }}
+      </p>
+    </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Exemplo de arquivo csv para importação</h2>
+    <p>data,if,titulo,quantidade,valor_mercado,valor_provento</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",BRCR11,13,"1425,06","13,13"</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",KNRI11,7,"743,75","6,44"</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",XPGA11,50,4452,35</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",XPCM11,64,"5143,04","50,56"</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",BCFF11B,21,"1406,58","9,85"</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",FEXC11B,16,1504,"14,69"</p>
+    <p>2014/12/31,"Mirae Asset Securities (Brasil) C.T.V.M",JRDM11B,14,"980,7","10,36"</p>
+    <p>2014/12/31,"SPINELLI S.A. CVMC",CEOC11B,252,10647,189</p>
+    <p>2014/12/31,"SPINELLI S.A. CVMC",HTMX11B,25,"3460,75","80,25"</p>
+  </div>
+</div>
+{% endblock %}

@@ -3,14 +3,12 @@
 namespace Royopa\SicinBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
-use Royopa\SicinBundle\Form\ImportacaoType;
 use Royopa\SicinBundle\Entity\InstituicaoFinanceira;
 use Royopa\SicinBundle\Entity\Ativo;
 use Ddeboer\DataImport\Reader\CsvReader;
@@ -86,9 +84,6 @@ class ImportacaoBmfBovespaController extends ImportacaoController
             //persiste no banco de dados
             $em->persist($posicao);
             $em->flush();
-
-            var_dump($row);
-            echo '<p>Salvo</p>';
         }
 
         $this->get('session')->getFlashBag()->add(

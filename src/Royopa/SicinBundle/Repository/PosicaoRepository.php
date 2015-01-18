@@ -16,7 +16,7 @@ class PosicaoRepository extends EntityRepository
     /**
      * Pega a posição do mês anterior à posição informada
      *
-     * @return array[]
+     * @return Posicao
      */
     public function getPosicaoAnterior($posicao)
     {

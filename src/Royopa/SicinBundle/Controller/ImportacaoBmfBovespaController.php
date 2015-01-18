@@ -21,7 +21,7 @@ use Ddeboer\DataImport\Reader\CsvReader;
  * @Route("/importacao_bmfbovespa")
  * @Security("has_role('ROLE_ADMIN')")
  */
-class ImportacaoBmfBovespaController extends Controller
+class ImportacaoBmfBovespaController extends ImportacaoController
 {
     /**
      * Importa o extrato da bmf bovespa com a posição
@@ -32,14 +32,7 @@ class ImportacaoBmfBovespaController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(
-            new ImportacaoType(),
-            null,
-            array(
-                'action' => $this->generateUrl('importacao_bmfbovespa_new'),
-                'method' => 'POST',
-            )
-        );
+        $form = $this->getCreateForm('importacao_bmfbovespa_new');
 
         $form->handleRequest($request);
 
@@ -85,9 +78,8 @@ class ImportacaoBmfBovespaController extends Controller
 
             //procura a if
             $if = $this->getIf($row['if'], $em);
-            
+            //procura o ativo
             $ativo = $this->getAtivo($row['titulo'], $em);
-
             //popula a posição
             $posicao = $this->populatePosicao($row, new Posicao(), $if, $ativo);
 
@@ -109,32 +101,6 @@ class ImportacaoBmfBovespaController extends Controller
                 'posicao'
             )
         );
-    }
-
-    protected function getIf($if, $em)
-    {
-        //localiza a if título
-        $if = $em->getRepository('RoyopaSicinBundle:InstituicaoFinanceira')
-            ->findOneByNome($if);
-
-        if (!$if) {
-            throw $this->createNotFoundException('Unable to find if entity.');
-        }
-
-        return $if;
-    }
-
-    protected function getAtivo($ativo, $em)
-    {
-        //título/ativo
-        $ativo = $em->getRepository('RoyopaSicinBundle:Ativo')
-            ->findOneByCodigo($ativo);
-
-        if (!$ativo) {
-            throw $this->createNotFoundException('Ativo ' . $ativo . ' não cadastrado.');
-        }
-
-        return $ativo;
     }
 
     protected function populatePosicao(
@@ -159,19 +125,5 @@ class ImportacaoBmfBovespaController extends Controller
         $posicao->setValorProvento($row['valor_provento']);
 
         return $posicao;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads';
     }
 }

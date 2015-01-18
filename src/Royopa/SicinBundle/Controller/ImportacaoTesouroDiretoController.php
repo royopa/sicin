@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\ImportacaoType;
+use Royopa\SicinBundle\Entity\InstituicaoFinanceira;
+use Royopa\SicinBundle\Entity\Ativo;
 use Ddeboer\DataImport\Reader\CsvReader;
 
 /**
@@ -19,7 +21,7 @@ use Ddeboer\DataImport\Reader\CsvReader;
  * @Route("/importacao_tesouro_direto")
  * @Security("has_role('ROLE_ADMIN')")
  */
-class ImportacaoTesouroDiretoController extends Controller
+class ImportacaoTesouroDiretoController extends ImportacaoController
 {
     /**
      * Lists all AtivoTipo entities.
@@ -30,14 +32,7 @@ class ImportacaoTesouroDiretoController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(
-            new ImportacaoType(),
-            null,
-            array(
-                'action' => $this->generateUrl('importacao_tesouro_direto_new'),
-                'method' => 'POST',
-            )
-        );
+        $form = $this->getCreateForm('importacao_tesouro_direto_new');
 
         $form->handleRequest($request);
 
@@ -81,58 +76,52 @@ class ImportacaoTesouroDiretoController extends Controller
                 continue;
             }
 
-            //localiza a if título
-            $if = $em->getRepository('RoyopaSicinBundle:InstituicaoFinanceira')->findOneByNome($row['if']);
-
-            if (!$if) {
-                throw $this->createNotFoundException('Unable to find if entity.');
-            }
-
-            //título/ativo
-            $ativo = $em->getRepository('RoyopaSicinBundle:Ativo')->findOneByCodigo($row['titulo']);
-
-            if (!$ativo) {
-                
-                throw $this->createNotFoundException('Ativo ' . $row['titulo'] . ' não cadastrado.');
-            }
-
-            //se não existir nenhuma posição já cadastrada com os mesmos dados, cadastra nova posição
-            $posicao = new Posicao();
-            //data
-            $posicao->setDataReferencia(new \DateTime($row['data']));
-            //if
-            $posicao->setInstituicaoFinanceira($if);
-            //ativo
-            $posicao->setAtivo($ativo);
-            //quantidade
-            $row['atual'] = str_replace(',', '.', $row['atual']);
-            $posicao->setQuantidade($row['atual']);
-            //valor custo
-            $row['origem'] = str_replace(',', '.', $row['origem']);
-            $posicao->setValorBrutoTotal($row['origem']);
-            //liquido
-            $row['liquido'] = str_replace(',', '.', $row['liquido']);
-            $posicao->setValorLiquidoTotal($row['liquido']);
-
+            //procura a if
+            $if = $this->getIf($row['if'], $em);
+            //procura o ativo
+            $ativo = $this->getAtivo($row['titulo'], $em);
+            //popula a posição
+            $posicao = $this->populatePosicao($row, new Posicao(), $if, $ativo);
             //persiste no banco de dados
             $em->persist($posicao);
             $em->flush();
         }
 
-        return new Response(var_dump($reader));
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Posições importadas com sucesso!'
+        );
+
+        return $this->redirect(
+            $this->generateUrl(
+                'posicao'
+            )
+        );
     }
 
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
+    protected function populatePosicao(
+        $row,
+        Posicao $posicao,
+        InstituicaoFinanceira $if,
+        Ativo $ativo
+    ) {
+        //data
+        $posicao->setDataReferencia(new \DateTime($row['data']));
+        //if
+        $posicao->setInstituicaoFinanceira($if);
+        //ativo
+        $posicao->setAtivo($ativo);
+        //quantidade
+        $row['atual'] = str_replace(',', '.', $row['atual']);
+        $posicao->setQuantidade((float) $row['atual']);
+        //valor custo
+        $row['origem'] = str_replace(',', '.', $row['origem']);
+        $posicao->setValorBrutoTotal((float)$row['origem']);
+        $posicao->setValorMercado((float) $row['origem']);
+        //liquido
+        $row['liquido'] = str_replace(',', '.', $row['liquido']);
+        $posicao->setValorLiquidoTotal((float)$row['liquido']);
 
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads';
+        return $posicao;
     }
 }

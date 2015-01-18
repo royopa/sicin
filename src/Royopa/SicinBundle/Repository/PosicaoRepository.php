@@ -82,9 +82,6 @@ class PosicaoRepository extends EntityRepository
             ->andWhere('s.dataReferencia LIKE :data')
             ->setParameter('data', $string.'%');
 
-        $qy=$query->getQuery();
-        $sql=$qy->getSQL();
-
         $query->groupBy('t.nome');
         $query->orderBy('valorLiquidoTotal', 'DESC');
 

@@ -113,6 +113,8 @@ class ImportacaoController extends Controller
             $ativo = $this->getAtivo($row['titulo'], $em);
 
             //popula a posição
+            $posicao = new Posicao();
+
             if ($tipoExtrato == 'tesouro_direto') {
                 $posicao = $this->populatePosicaoTesouroDireto($row, new Posicao(), $if, $ativo);
             }

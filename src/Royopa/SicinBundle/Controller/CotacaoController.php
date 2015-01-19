@@ -48,8 +48,6 @@ class CotacaoController extends Controller
      */
     public function showAction($codigo)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $client = new \Scheb\YahooFinanceApi\ApiClient();
 
         $ativo = $client->search($codigo);

@@ -10,7 +10,6 @@ http://sicin.esy.es/
     $ cd sicin
     $ composer update
     $ bower update
-    $ composer run
 
 To see a real-live page in action, start the PHP built-in web server with
 command:

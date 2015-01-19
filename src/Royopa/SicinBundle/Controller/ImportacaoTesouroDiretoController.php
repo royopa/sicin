@@ -28,7 +28,7 @@ class ImportacaoTesouroDiretoController extends ImportacaoController
      * @Method({"POST","GET"})
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function importacaoTesouroDiretoIndexAction(Request $request)
     {
         $form = $this->getCreateForm('importacao_tesouro_direto_new');
 

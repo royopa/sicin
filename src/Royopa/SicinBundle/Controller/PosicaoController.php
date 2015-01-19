@@ -32,19 +32,26 @@ class PosicaoController extends Controller
      */
     public function sinteticaIndexAction(Request $request)
     {
-        $form = $this->createForm(new ConsultaPosicaoSinteticaType(), null, array(
-            'action' => $this->generateUrl('posicao_sintetica'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new ConsultaPosicaoSinteticaType(),
+            null,
+            array(
+                'action' => $this->generateUrl('posicao_sintetica'),
+                'method' => 'POST',
+            )
+        );
 
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
-            return $this->render('RoyopaSicinBundle:Form:form_consulta_posicao_sintetica.html.twig', array(
-                'title'       => 'Consulta posição sintética de investimentos',
-                'subtitle' => 'Utilize o formulário abaixo para consultar a posição sintética de investimentos.',
-                'form'     => $form->createView(),
-            ));
+            return $this->render(
+                'RoyopaSicinBundle:Form:form_consulta_posicao_sintetica.html.twig',
+                array(
+                    'title'       => 'Consulta posição sintética de investimentos',
+                    'subtitle' => 'Utilize o formulário abaixo para consultar a posição sintética de investimentos.',
+                    'form'     => $form->createView(),
+                )
+            );
         }
 
         $data = $form->getData();
@@ -82,7 +89,9 @@ class PosicaoController extends Controller
         $entities =
             $em
                 ->getRepository('RoyopaSicinBundle:Posicao')
-                ->findByDataReferencia($dataReferencia);
+                ->findBy(
+                    ['dataReferencia' => $dataReferencia]
+                );
 
         $valorBrutoTotal    = 0;
         $valorLiquidoTotal  = 0;
@@ -152,12 +161,14 @@ class PosicaoController extends Controller
      */
     private function createCreateForm(Posicao $entity)
     {
-        $form = $this->createForm(new PosicaoType(), $entity, array(
-            'action' => $this->generateUrl('posicao_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form = $this->createForm(
+            new PosicaoType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('posicao_create'),
+                'method' => 'POST',
+            )
+        );
 
         return $form;
     }
@@ -241,10 +252,14 @@ class PosicaoController extends Controller
     */
     private function createEditForm(Posicao $entity)
     {
-        $form = $this->createForm(new PosicaoType(), $entity, array(
-            'action' => $this->generateUrl('posicao_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new PosicaoType(),
+            $entity,
+            array(
+                'action' => $this->generateUrl('posicao_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
@@ -327,8 +342,7 @@ class PosicaoController extends Controller
             ->setAction($this->generateUrl('posicao_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
     /**
      * Gets the last position for ativo.

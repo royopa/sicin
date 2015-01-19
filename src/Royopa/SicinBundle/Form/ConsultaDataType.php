@@ -25,7 +25,7 @@ class ConsultaDataType extends AbstractType
                 'format'   => 'MM/yyyy',
                 'attr'     => array(
                     'class' => 'form-control datepicker',
-                    'value' => $date->format('d/m/Y')
+                    'value' => $date->format('d/m/Y'),
                     ),
                 'constraints' => array(
                     new Assert\NotBlank(),
@@ -33,15 +33,15 @@ class ConsultaDataType extends AbstractType
                 ))
             ->add('submit', 'submit', array(
                 'attr'     => array(
-                    'class'=> 'btn btn-default'
-                    )
+                    'class' => 'btn btn-default',
+                    ),
                 ))
             ;
     }
 
     /**
      * @var DateTime
-     * Data de referência
+     *               Data de referência
      * @Assert\NotBlank()
      * @Assert\Type("\DateTime")
      */

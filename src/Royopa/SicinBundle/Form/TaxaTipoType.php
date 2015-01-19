@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TaxaTipoType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -19,8 +19,8 @@ class TaxaTipoType extends AbstractType
                 'label' => 'Nome',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'
-                    )
+                    'class' => 'form-control',
+                    ),
                 )
             )
         ;
@@ -32,7 +32,7 @@ class TaxaTipoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Royopa\SicinBundle\Entity\TaxaTipo'
+            'data_class' => 'Royopa\SicinBundle\Entity\TaxaTipo',
         ));
     }
 

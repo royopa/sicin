@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PosicaoType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -22,8 +22,8 @@ class PosicaoType extends AbstractType
                 'label' => 'Instituicao Financeira',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control select2'
-                    )
+                    'class' => 'form-control select2',
+                    ),
                 )
             )
             ->add(
@@ -33,8 +33,8 @@ class PosicaoType extends AbstractType
                 'label' => 'Ativo',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control select2'
-                    )
+                    'class' => 'form-control select2',
+                    ),
                 )
             )
             ->add(
@@ -46,8 +46,8 @@ class PosicaoType extends AbstractType
                     'widget' => 'single_text',
                     'format' => 'dd/MM/yyyy',
                     'attr' => array(
-                        'class' => 'form-control datepicker'
-                    )
+                        'class' => 'form-control datepicker',
+                    ),
                 )
             )
             ->add(
@@ -58,8 +58,8 @@ class PosicaoType extends AbstractType
                     'grouping' => true,
                     'required' => true,
                     'attr' => array(
-                        'class' => 'form-control'
-                    )
+                        'class' => 'form-control',
+                    ),
                 )
             )
             ->add(
@@ -69,8 +69,8 @@ class PosicaoType extends AbstractType
                     'label' => 'Custo Total',
                     'required' => true,
                     'attr' => array(
-                        'class' => 'form-control'
-                    )
+                        'class' => 'form-control',
+                    ),
                 )
             )
             ->add(
@@ -80,8 +80,8 @@ class PosicaoType extends AbstractType
                     'label' => 'Valor Líquido Total',
                     'required' => true,
                     'attr' => array(
-                        'class' => 'form-control'
-                    )
+                        'class' => 'form-control',
+                    ),
                 )
             )
             ->add(
@@ -91,8 +91,8 @@ class PosicaoType extends AbstractType
                     'label' => 'Valor Mercado',
                     'required' => false,
                     'attr' => array(
-                        'class' => 'form-control'
-                    )
+                        'class' => 'form-control',
+                    ),
                 )
             )
             ->add(
@@ -102,8 +102,8 @@ class PosicaoType extends AbstractType
                     'label' => 'Valor Proventos',
                     'required' => false,
                     'attr' => array(
-                        'class' => 'form-control'
-                    )
+                        'class' => 'form-control',
+                    ),
                 )
             )
             ->add(
@@ -111,8 +111,8 @@ class PosicaoType extends AbstractType
                 'submit',
                 array(
                     'attr'     => array(
-                        'class'=> 'btn btn-default'
-                    )
+                        'class' => 'btn btn-default',
+                    ),
                 )
             )
         ;
@@ -125,7 +125,7 @@ class PosicaoType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Royopa\SicinBundle\Entity\Posicao'
+                'data_class' => 'Royopa\SicinBundle\Entity\Posicao',
             )
         );
     }

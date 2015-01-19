@@ -15,7 +15,7 @@ use Royopa\SicinBundle\Form\AtivoTipoType;
  * AtivoTipo controller.
  *
  * @Route("/ativo_tipo")
- * @Security("has_role('ROLE_ADMIN')") 
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class AtivoTipoController extends Controller
 {
@@ -65,12 +65,12 @@ class AtivoTipoController extends Controller
     }
 
     /**
-    * Creates a form to create a AtivoTipo entity.
-    *
-    * @param AtivoTipo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a AtivoTipo entity.
+     *
+     * @param AtivoTipo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(AtivoTipo $entity)
     {
         $form = $this->createForm(new AtivoTipoType(), $entity, array(
@@ -154,12 +154,12 @@ class AtivoTipoController extends Controller
     }
 
     /**
-    * Creates a form to edit a AtivoTipo entity.
-    *
-    * @param AtivoTipo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a AtivoTipo entity.
+     *
+     * @param AtivoTipo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(AtivoTipo $entity)
     {
         $form = $this->createForm(new AtivoTipoType(), $entity, array(

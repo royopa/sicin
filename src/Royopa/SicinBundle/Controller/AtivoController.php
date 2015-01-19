@@ -65,12 +65,12 @@ class AtivoController extends Controller
     }
 
     /**
-    * Creates a form to create a Ativo entity.
-    *
-    * @param Ativo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Ativo entity.
+     *
+     * @param Ativo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Ativo $entity)
     {
         $form = $this->createForm(new AtivoType(), $entity, array(
@@ -154,12 +154,12 @@ class AtivoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Ativo entity.
-    *
-    * @param Ativo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Ativo entity.
+     *
+     * @param Ativo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Ativo $entity)
     {
         $form = $this->createForm(new AtivoType(), $entity, array(

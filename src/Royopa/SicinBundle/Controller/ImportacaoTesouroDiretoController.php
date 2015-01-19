@@ -47,11 +47,11 @@ class ImportacaoTesouroDiretoController extends ImportacaoController
 
         $uploadedFile = $form['attachment']->getData();
 
-        $endereco = $this->getUploadRootDir().'/extrato.' . $uploadedFile->guessExtension();
+        $endereco = $this->getUploadRootDir().'/extrato.'.$uploadedFile->guessExtension();
 
         $file = $uploadedFile->move(
             $this->getUploadRootDir(),
-            'extrato.' . $uploadedFile->guessExtension()
+            'extrato.'.$uploadedFile->guessExtension()
         );
 
         //verifica o mime/type do arquivo
@@ -69,7 +69,6 @@ class ImportacaoTesouroDiretoController extends ImportacaoController
         $em = $this->getDoctrine()->getManager();
 
         foreach ($reader as $row) {
-
             if (!$row) {
                 continue;
             }
@@ -114,11 +113,11 @@ class ImportacaoTesouroDiretoController extends ImportacaoController
         $posicao->setQuantidade((float) $row['atual']);
         //valor custo
         $row['origem'] = str_replace(',', '.', $row['origem']);
-        $posicao->setValorBrutoTotal((float)$row['origem']);
+        $posicao->setValorBrutoTotal((float) $row['origem']);
         $posicao->setValorMercado((float) $row['origem']);
         //liquido
         $row['liquido'] = str_replace(',', '.', $row['liquido']);
-        $posicao->setValorLiquidoTotal((float)$row['liquido']);
+        $posicao->setValorLiquidoTotal((float) $row['liquido']);
 
         return $posicao;
     }

@@ -23,7 +23,7 @@ class ConsultaPosicaoSinteticaType extends AbstractType
                 'required' => true,
                 'attr'     => array(
                     'class' => 'form-control',
-                    'value' => $date->format('m')
+                    'value' => $date->format('m'),
                     ),
                 'constraints' => array(
                     new Assert\NotBlank(),
@@ -40,7 +40,7 @@ class ConsultaPosicaoSinteticaType extends AbstractType
                     '09' => 'Set',
                     '10' => 'Out',
                     '11' => 'Nov',
-                    '12' => 'Dez'
+                    '12' => 'Dez',
                     ),
                 ))
             ->add('ano', 'choice', array(
@@ -48,7 +48,7 @@ class ConsultaPosicaoSinteticaType extends AbstractType
                 'required' => true,
                 'attr'     => array(
                     'class' => 'form-control datepicker',
-                    'value' => $date->format('Y')
+                    'value' => $date->format('Y'),
                     ),
                 'constraints' => array(
                     new Assert\NotBlank(),
@@ -56,13 +56,13 @@ class ConsultaPosicaoSinteticaType extends AbstractType
                 'choices' => array(
                     '2014'  => '2014',
                     '2015'  => '2015',
-                    '2016'  => '2016'
+                    '2016'  => '2016',
                     ),
                 ))
             ->add('submit', 'submit', array(
                 'attr'     => array(
-                    'class'=> 'btn btn-default'
-                    )
+                    'class' => 'btn btn-default',
+                    ),
                 ))
             ;
     }

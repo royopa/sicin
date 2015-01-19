@@ -15,7 +15,7 @@ use Royopa\SicinBundle\Form\TaxaTipoType;
  * TaxaTipo controller.
  *
  * @Route("/taxa_tipo")
- * @Security("has_role('ROLE_ADMIN')") 
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class TaxaTipoController extends Controller
 {
@@ -65,12 +65,12 @@ class TaxaTipoController extends Controller
     }
 
     /**
-    * Creates a form to create a TaxaTipo entity.
-    *
-    * @param TaxaTipo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a TaxaTipo entity.
+     *
+     * @param TaxaTipo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(TaxaTipo $entity)
     {
         $form = $this->createForm(new TaxaTipoType(), $entity, array(
@@ -154,12 +154,12 @@ class TaxaTipoController extends Controller
     }
 
     /**
-    * Creates a form to edit a TaxaTipo entity.
-    *
-    * @param TaxaTipo $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a TaxaTipo entity.
+     *
+     * @param TaxaTipo $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(TaxaTipo $entity)
     {
         $form = $this->createForm(new TaxaTipoType(), $entity, array(

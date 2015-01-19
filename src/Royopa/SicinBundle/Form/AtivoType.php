@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AtivoType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -19,24 +19,24 @@ class AtivoType extends AbstractType
                 'label' => 'Tipo',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'
-                    )
+                    'class' => 'form-control',
+                    ),
                 )
             )
             ->add('nome', null, array(
                 'label' => 'Nome',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'
-                    )
+                    'class' => 'form-control',
+                    ),
                 )
             )
             ->add('codigo', null, array(
                 'label' => 'Código',
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'
-                    )
+                    'class' => 'form-control',
+                    ),
                 )
             )
             ->add('dataVencimento', 'date', array(
@@ -45,8 +45,8 @@ class AtivoType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
-                    'class' => 'form-control datepicker'
-                    )
+                    'class' => 'form-control datepicker',
+                    ),
                 )
             )
         ;
@@ -58,7 +58,7 @@ class AtivoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Royopa\SicinBundle\Entity\Ativo'
+            'data_class' => 'Royopa\SicinBundle\Entity\Ativo',
         ));
     }
 

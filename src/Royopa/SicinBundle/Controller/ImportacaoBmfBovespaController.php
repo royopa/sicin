@@ -47,11 +47,11 @@ class ImportacaoBmfBovespaController extends ImportacaoController
 
         $uploadedFile = $form['attachment']->getData();
 
-        $endereco = $this->getUploadRootDir().'/extrato.' . $uploadedFile->guessExtension();
+        $endereco = $this->getUploadRootDir().'/extrato.'.$uploadedFile->guessExtension();
 
         $file = $uploadedFile->move(
             $this->getUploadRootDir(),
-            'extrato.' . $uploadedFile->guessExtension()
+            'extrato.'.$uploadedFile->guessExtension()
         );
 
         //verifica o mime/type do arquivo
@@ -69,7 +69,6 @@ class ImportacaoBmfBovespaController extends ImportacaoController
         $em = $this->getDoctrine()->getManager();
 
         foreach ($reader as $row) {
-
             if (!$row) {
                 continue;
             }

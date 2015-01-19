@@ -176,6 +176,6 @@ class Ativo
      */
     public function __toString()
     {
-        return $this->codigo . ' - ' . $this->nome;
+        return $this->codigo.' - '.$this->nome;
     }
 }

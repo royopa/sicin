@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Royopa\SicinBundle\Entity\Posicao;
 use Royopa\SicinBundle\Form\PosicaoType;
-use Royopa\SicinBundle\Form\ConsultaDataType;
 use Royopa\SicinBundle\Form\ConsultaPosicaoSinteticaType;
 
 /**
@@ -69,7 +68,7 @@ class PosicaoController extends Controller
         return array(
             'ano'      => $ano,
             'mes'      => $mes,
-            'entities' => $entities
+            'entities' => $entities,
             );
     }
 
@@ -117,7 +116,7 @@ class PosicaoController extends Controller
             'valorLiquidoTotal'  => $valorLiquidoTotal,
             'valorAplicadoMes'   => $valorAplicadoMes,
             'valorRendimentoMes' => $valorRendimentoMes,
-            'valorProventoMes'   => $valorProventoMes
+            'valorProventoMes'   => $valorProventoMes,
         );
     }
     /**
@@ -244,12 +243,12 @@ class PosicaoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Posicao entity.
-    *
-    * @param Posicao $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Posicao entity.
+     *
+     * @param Posicao $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Posicao $entity)
     {
         $form = $this->createForm(
@@ -384,7 +383,7 @@ class PosicaoController extends Controller
         while ($row = $statement->fetch()) {
             $data = array(
             'vr_bruto_total' => number_format($row['vr_bruto_total'], 2, ",", ""),
-            'quantidade' => number_format($row['quantidade'], 0, ",", "")
+            'quantidade' => number_format($row['quantidade'], 0, ",", ""),
             );
         }
 

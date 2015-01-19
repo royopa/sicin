@@ -26,8 +26,8 @@ class ImportacaoType extends AbstractType
             ->add('submit', 'submit', array(
                 'label'    => 'Importar',
                 'attr'     => array(
-                    'class'=> 'btn btn-default'
-                    )
+                    'class' => 'btn btn-default',
+                    ),
                 ))
             ;
     }

@@ -65,12 +65,12 @@ class InstituicaoFinanceiraController extends Controller
     }
 
     /**
-    * Creates a form to create a InstituicaoFinanceira entity.
-    *
-    * @param InstituicaoFinanceira $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a InstituicaoFinanceira entity.
+     *
+     * @param InstituicaoFinanceira $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(InstituicaoFinanceira $entity)
     {
         $form = $this->createForm(new InstituicaoFinanceiraType(), $entity, array(
@@ -154,12 +154,12 @@ class InstituicaoFinanceiraController extends Controller
     }
 
     /**
-    * Creates a form to edit a InstituicaoFinanceira entity.
-    *
-    * @param InstituicaoFinanceira $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a InstituicaoFinanceira entity.
+     *
+     * @param InstituicaoFinanceira $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(InstituicaoFinanceira $entity)
     {
         $form = $this->createForm(new InstituicaoFinanceiraType(), $entity, array(

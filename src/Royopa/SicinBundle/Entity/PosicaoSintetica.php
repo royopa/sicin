@@ -2,8 +2,6 @@
 
 namespace Royopa\SicinBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Posicao Sintética
  *

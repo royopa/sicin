@@ -8,22 +8,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AtivoCategoriaType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nome', null, array(
-                'label' => 'Nome',
-                'required' => true,
-                'attr' => array(
-                    'class' => 'form-control'
-                    )
-                )
-            )
-        ;
+            ->add(
+                'nome',
+                null,
+                array(
+                    'label' => 'Nome',
+                    'required' => true,
+                    'attr' => array(
+                        'class' => 'form-control',
+                        ),
+                ));
     }
 
     /**
@@ -31,9 +32,9 @@ class AtivoCategoriaType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Royopa\SicinBundle\Entity\AtivoCategoria'
-        ));
+        $resolver->setDefaults(
+            ['data_class' => 'Royopa\SicinBundle\Entity\AtivoCategoria']
+        );
     }
 
     /**

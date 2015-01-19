@@ -15,7 +15,7 @@ use Royopa\SicinBundle\Form\AtivoCategoriaType;
  * AtivoCategoria controller.
  *
  * @Route("/ativo_categoria")
- * @Security("has_role('ROLE_ADMIN')") 
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class AtivoCategoriaController extends Controller
 {
@@ -65,12 +65,12 @@ class AtivoCategoriaController extends Controller
     }
 
     /**
-    * Creates a form to create a AtivoCategoria entity.
-    *
-    * @param AtivoCategoria $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a AtivoCategoria entity.
+     *
+     * @param AtivoCategoria $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(AtivoCategoria $entity)
     {
         $form = $this->createForm(new AtivoCategoriaType(), $entity, array(
@@ -154,12 +154,12 @@ class AtivoCategoriaController extends Controller
     }
 
     /**
-    * Creates a form to edit a AtivoCategoria entity.
-    *
-    * @param AtivoCategoria $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a AtivoCategoria entity.
+     *
+     * @param AtivoCategoria $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(AtivoCategoria $entity)
     {
         $form = $this->createForm(new AtivoCategoriaType(), $entity, array(

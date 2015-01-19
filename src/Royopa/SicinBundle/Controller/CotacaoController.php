@@ -71,8 +71,8 @@ class CotacaoController extends Controller
             'name' => "AAPL",
             'data' => new HighchartJsExpr("data"),
             'tooltip' => array(
-                'valueDecimals' => 2
-            )
+                'valueDecimals' => 2,
+            ),
         );
 
         //Get historical data

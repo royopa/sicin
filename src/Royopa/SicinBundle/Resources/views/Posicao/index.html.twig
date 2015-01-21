@@ -20,6 +20,7 @@
         <thead>
             <tr class="small">
                 <th>Data</th>
+                <th>Instituição Financeira</th>
                 <th>Ativo</th>
                 <th>Valor de mercado</th>
                 <th>Provento Mês</th>
@@ -33,6 +34,7 @@
                     {{ entity.dataReferencia.format('d/m/Y') }}
                   </a>
                 </td>
+                <td>{{ entity.instituicaoFinanceira.nome|split(' ')[0] }}</td>
                 <td title="{{ entity.instituicaoFinanceira.nome }} - {{ entity.ativo.nome }} - Quantidade: {{ entity.quantidade|number_format(2, ',', '.') }}">{{ entity.ativo.codigo }}</td>
                 <td>{{ entity.valorMercado|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorProvento|number_format(2, ',', '.') }}</td>

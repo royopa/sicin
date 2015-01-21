@@ -19,30 +19,32 @@
             <tr>
                 <th>Data</th>
                 <th>Tipo</th>
+                <th>Valor mercado</th>
                 <th>Valor proventos</th>
-                <th>Custo</th>
-                <th>Valor Líquido</th>
-                <th>Valor Atual</th>
-                <th>% Rendimento</th>
             </tr>
         </thead>
         <tbody>
+        {% set valorTotalMercado = 0 %}
+        {% set valorTotalProvento = 0 %}
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.dataReferencia.format('d/m/Y') }}</td>
                 <td>{{ entity.nome }}</td>
-                <td>{{ entity.valorProvento|number_format(2, ',', '.') }}</td>
-                <td>{{ entity.valorBrutoTotal|number_format(2, ',', '.') }}</td>
-                <td>{{ entity.valorLiquidoTotal|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorMercado|number_format(2, ',', '.') }}</td>
-                {% if entity.valorProvento == 0 %}
-                <td>{{ (((entity.valorLiquidoTotal/entity.valorBrutoTotal)*100)-100)|number_format(4, ',', '.') }}</td>
-                {% else %}
-                <td>{{ ((entity.valorProvento/entity.valorLiquidoTotal)*100)|number_format(4, ',', '.') }}</td>
-                {% endif %}
+                <td>{{ entity.valorProvento|number_format(2, ',', '.') }}</td>
             </tr>
+        {% set valorTotalMercado = valorTotalMercado + entity.valorMercado %}
+        {% set valorTotalProvento = valorTotalProvento + entity.valorProvento %}            
         {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{ valorTotalMercado|number_format(2, ',', '.') }}</td>
+                <td>{{ valorTotalProvento|number_format(2, ',', '.') }}</td>
+            </tr>
+        </tfoot>>        
       </table>
     </div>
 </div>

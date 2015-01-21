@@ -23,10 +23,12 @@
                 <th>Instituição Financeira</th>
                 <th>Ativo</th>
                 <th>Valor de mercado</th>
-                <th>Provento Mês</th>
+                <th>Valor proventos</th>
             </tr>
         </thead>
         <tbody>
+        {% set valorTotalMercado = 0 %}
+        {% set valorTotalProvento = 0 %}
         {% for entity in entities %}
             <tr>
                 <td>
@@ -39,8 +41,19 @@
                 <td>{{ entity.valorMercado|number_format(2, ',', '.') }}</td>
                 <td>{{ entity.valorProvento|number_format(2, ',', '.') }}</td>
             </tr>
+        {% set valorTotalMercado = valorTotalMercado + entity.valorMercado %}
+        {% set valorTotalProvento = valorTotalProvento + entity.valorProvento %}
         {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ valorTotalMercado|number_format(2, ',', '.') }}</td>
+                <td>{{ valorTotalProvento|number_format(2, ',', '.') }}</td>
+            </tr>
+        </tfoot>>
       </table>
     </div>
 </div>

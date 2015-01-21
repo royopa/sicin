@@ -13,11 +13,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
                 <input type="text" id="username" name="_username" required="required" class="
-                form-control" placeholder = "Matrícula" autofocus = ""
-                {% if app.request.server.get('REMOTE_USER') != null %}
-                    readonly=""
-                {% endif %}
-                />
+                form-control" placeholder = "username" autofocus = "" />
 
                 <input type="password" id="password" name="_password" required="required" class="
                 form-control" placeholder = "Senha"/>
